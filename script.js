@@ -10,28 +10,28 @@
 const ADMIN = "6285117010280";
 
 const MP = [
-  { id:'m1', em:'🐙', n:'Small  (5 btr)',      h:10000, badge:'5 Btr' },
-  { id:'m2', em:'🐙', n:'Medium (10 btr)',     h:18000, badge:'10 Btr' },
-  { id:'m3', em:'🐙', n:'Large  (15 btr)',     h:25000, badge:'15 Btr' },
-  { id:'m4', em:'🎁', n:'Gratis / Promo',      h:0,     badge:'FREE' },
+  {id:'m1',  em:'🐙', n:'Small', h:10000, badge:'5'},
+  {id:'m2',  em:'🐙', n:'Medium', h:18000, badge:'10'},
+  {id:'m3',  em:'🐙', n:'Large', h:25000, badge:'15'},
+  {id:'m4', em:'🎁', n:'Gratis',          h:0,     badge:'FREE'},
 ];
-
 const MT = [
-  { id:'t1', em:'🧀', n:'Keju',        h:0 },
-  { id:'t2', em:'🥚', n:'Telur Puyuh', h:0 },
-  { id:'t3', em:'🍗', n:'Ayam',        h:0 },
-  { id:'t4', em:'🐙', n:'Gurita',      h:0 },
-  { id:'t5', em:'🥓', n:'Kornet',      h:0 },
-  { id:'t6', em:'🦀', n:'Crabstick',   h:0 },
-  { id:'t7', em:'🌭', n:'Sosis',       h:0 },
+  {id:'t1', em:'🧀', n:'Keju',  h:0},
+  {id:'t2', em:'🥚', n:'Telur Puyuh', h:0},
+  {id:'t3', em:'🍗', n:'Ayam',  h:0},
+  {id:'t4', em:'🐙', n:'Gurita',      h:0},
+  {id:'t5', em:'🍳', n:'Eggroll', h:0},
+  {id:'t6', em:'🥯', n:'Cikuwa', h:0},
+  {id:'t7', em:'🥓', n:'Kornet', h:0},
+  {id:'t8', em:'🦀', n:'Crabstick', h:0},
+  {id:'t9', em:'🌭', n:'Sosis', h:0},
 ];
-
 const MS = [
-  { id:'s1', em:'🍯', n:'Saus Takoyaki', h:0    },
-  { id:'s2', em:'🥛', n:'Mayo',          h:0    },
-  { id:'s3', em:'🧀', n:'Keju Leleh',    h:3000 },
-  { id:'s4', em:'🟢', n:'Wasabi Mayo',   h:3000 },
-  { id:'s5', em:'🔵', n:'Unagi Sauce',   h:3000 },
+  {id:'s1', em:'🧀', n:'Keju',         h:3000},
+  {id:'s2', em:'🍡', n:'Saus takoyaki',    h:0},
+  {id:'s3', em:'🍯', n:'Mayones',  h:0},
+  {id:'s4', em:'🌶️', n:'Saus Pedas',    h:0},
+  {id:'s5', em:'⚫', n:'Pisah Semua',    h:0},
 ];
 
 const STOK_AWAL = [
