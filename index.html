@@ -350,10 +350,209 @@
 .manual-input-card button:hover {
     background: #c70034;
 }
+
+    /* --- Tombol Pemicu Utama --- */
+.calc-trigger-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #e8003d; /* Senada dengan warna merah Takoyaki Mazboy */
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 9998;
+    transition: transform 0.2s, background 0.2s;
+}
+.calc-trigger-btn:hover {
+    transform: scale(1.05);
+    background: #c70034;
+}
+
+/* --- Container Utama Kalkulator Melayang --- */
+.floating-calculator {
+    position: fixed;
+    top: 15%;
+    left: 70%;
+    width: 320px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 9999;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    user-select: none;
+    transition: height 0.2s ease-in-out;
+}
+
+/* State ketika disembunyikan total */
+.floating-calculator.hidden {
+    display: none;
+}
+
+/* State ketika diperkecil (Minimize) */
+.floating-calculator.minimized .calc-body {
+    display: none;
+}
+.floating-calculator.minimized {
+    width: 200px;
+}
+
+/* --- Header Kalkulator --- */
+.calc-header {
+    background: #2a2a2a;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move; /* Indikator bahwa komponen ini bisa digeser */
+    border-bottom: 1px solid #333;
+}
+.calc-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+.calc-controls button {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+}
+.calc-controls button:hover {
+    background: #444;
+    color: #fff;
+}
+#calc-close-btn:hover {
+    background: #e8003d;
+}
+
+/* --- Layar Output --- */
+.calc-screen {
+    background: #111;
+    padding: 20px;
+    text-align: right;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.calc-history {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.calc-output {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* --- Grid Tombol --- */
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #2a2a2a;
+    padding: 1px;
+}
+.btn {
+    border: none;
+    background: #1e1e1e;
+    color: #fff;
+    padding: 18px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+.btn:hover {
+    background: #2d2d2d;
+}
+.btn:active {
+    background: #3c3c3c;
+}
+
+/* Variasi Warna Tombol */
+.btn-action {
+    color: #e8003d;
+}
+.btn-operator {
+    color: #ff9f0a;
+}
+.btn-equals {
+    background: #ff9f0a;
+    color: #fff;
+}
+.btn-equals:hover {
+    background: #e08b07;
+}
+.btn-zero {
+    grid-column: span 2;
+}
   </style>
 </head>
 <body>
+<button id="calc-trigger-btn" class="calc-trigger-btn">
+    📊 Kalkulator
+</button>
 
+<div id="floating-calc" class="floating-calculator hidden">
+    <div id="calc-header" class="calc-header">
+        <span class="calc-title">🧮 Kalkulator</span>
+        <div class="calc-controls">
+            <button id="calc-min-btn" title="Minimize">−</button>
+            <button id="calc-close-btn" title="Close">×</button>
+        </div>
+    </div>
+    
+    <div class="calc-body">
+        <div class="calc-screen">
+            <div id="calc-history" class="calc-history"></div>
+            <div id="calc-output" class="calc-output">0</div>
+        </div>
+        
+        <div class="calc-buttons">
+            <button class="btn btn-action" data-action="clear">C</button>
+            <button class="btn btn-action" data-action="backspace">⌫</button>
+            <button class="btn btn-action" data-action="percent">%</button>
+            <button class="btn btn-operator" data-action="divide">÷</button>
+            
+            <button class="btn" data-num="7">7</button>
+            <button class="btn" data-num="8">8</button>
+            <button class="btn" data-num="9">9</button>
+            <button class="btn btn-operator" data-action="multiply">×</button>
+            
+            <button class="btn" data-num="4">4</button>
+            <button class="btn" data-num="5">5</button>
+            <button class="btn" data-num="6">6</button>
+            <button class="btn btn-operator" data-action="subtract">−</button>
+            
+            <button class="btn" data-num="1">1</button>
+            <button class="btn" data-num="2">2</button>
+            <button class="btn" data-num="3">3</button>
+            <button class="btn btn-operator" data-action="add">+</button>
+            
+            <button class="btn btn-zero" data-num="0">0</button>
+            <button class="btn" data-num=".">.</button>
+            <button class="btn btn-equals" data-action="calculate">=</button>
+        </div>
+    </div>
+</div>
+  
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-pattern"></div>
@@ -1900,6 +2099,179 @@ window.onload = () => {
     }
   });
 };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const calc = document.getElementById("floating-calc");
+    const header = document.getElementById("calc-header");
+    const triggerBtn = document.getElementById("calc-trigger-btn");
+    const closeBtn = document.getElementById("calc-close-btn");
+    const minBtn = document.getElementById("calc-min-btn");
+    
+    const output = document.getElementById("calc-output");
+    const history = document.getElementById("calc-history");
+    const buttons = document.querySelectorAll(".btn");
+
+    let currentInput = "0";
+    let previousInput = "";
+    let operator = null;
+    let shouldResetScreen = false;
+
+    // --- 1. Fitur Buka / Tutup / Minimize ---
+    triggerBtn.addEventListener("click", () => {
+        calc.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+        calc.classList.add("hidden");
+    });
+
+    minBtn.addEventListener("click", () => {
+        calc.classList.toggle("minimized");
+        minBtn.textContent = calc.classList.contains("minimized") ? "🗖" : "−";
+    });
+
+    // --- 2. Logika Utama Kalkulator ---
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const num = button.dataset.num;
+            const action = button.dataset.action;
+
+            if (num !== undefined) appendNumber(num);
+            if (action !== undefined) handleAction(action);
+        });
+    });
+
+    function appendNumber(num) {
+        if (currentInput === "0" && num !== "." || shouldResetScreen) {
+            currentInput = num;
+            shouldResetScreen = false;
+        } else {
+            if (num === "." && currentInput.includes(".")) return;
+            currentInput += num;
+        }
+        updateScreen();
+    }
+
+    function handleAction(action) {
+        switch (action) {
+            case "clear":
+                currentInput = "0";
+                previousInput = "";
+                operator = null;
+                history.textContent = "";
+                break;
+            case "backspace":
+                if (currentInput.length > 1) {
+                    currentInput = currentInput.slice(0, -1);
+                } else {
+                    currentInput = "0";
+                }
+                break;
+            case "percent":
+                currentInput = (parseFloat(currentInput) / 100).toString();
+                break;
+            case "add":
+            case "subtract":
+            case "multiply":
+            case "divide":
+                setOperator(action);
+                break;
+            case "calculate":
+                evaluate();
+                break;
+        }
+        updateScreen();
+    }
+
+    function setOperator(op) {
+        if (operator !== null) evaluate();
+        previousInput = currentInput;
+        operator = op;
+        const opSymbols = { add: "+", subtract: "−", multiply: "×", divide: "÷" };
+        history.textContent = `${previousInput} ${opSymbols[op]}`;
+        shouldResetScreen = true;
+    }
+
+    function evaluate() {
+        if (operator === null || shouldResetScreen) return;
+        
+        let result = 0;
+        const prev = parseFloat(previousInput);
+        const current = parseFloat(currentInput);
+
+        switch (operator) {
+            case "add": result = prev + current; break;
+            case "subtract": result = prev - current; break;
+            case "multiply": result = prev * current; break;
+            case "divide": 
+                result = current === 0 ? "Error" : prev / current; 
+                break;
+        }
+
+        // Membatasi angka di belakang koma agar tidak terlalu panjang
+        if (typeof result === "number") {
+            result = Math.round(result * 10000000) / 10000000;
+        }
+
+        history.textContent += ` ${currentInput} =`;
+        currentInput = result.toString();
+        operator = null;
+    }
+
+    function updateScreen() {
+        output.textContent = currentInput;
+    }
+
+    // --- 3. Fitur Drag & Drop (Geser) Lancar PC & HP ---
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
+
+    header.addEventListener("mousedown", dragStart);
+    header.addEventListener("touchstart", dragStart, { passive: false });
+
+    function dragStart(e) {
+        if (e.target.tagName === "BUTTON") return; // Cegah drag jika menekan tombol kontrol
+
+        isDragging = true;
+        const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+        
+        const rect = calc.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+
+        document.addEventListener("mousemove", dragMove);
+        document.addEventListener("touchmove", dragMove, { passive: false });
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("touchend", dragEnd);
+    }
+
+    function dragMove(e) {
+        if (!isDragging) return;
+        if (e.type === "touchmove") e.preventDefault(); // Mencegah scroll layar HP saat geser
+
+        const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        // Terapkan posisi baru berdasarkan kalkulasi pergeseran posisi awal
+        calc.style.left = `${initialX + dx}px`;
+        calc.style.top = `${initialY + dy}px`;
+        calc.style.right = "auto"; // Override gaya CSS kanan default
+    }
+
+    function dragEnd() {
+        isDragging = false;
+        document.removeEventListener("mousemove", dragMove);
+        document.removeEventListener("touchmove", dragMove);
+    }
+});
+  
 </script>
 </body>
 </html>
