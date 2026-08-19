@@ -32,6 +32,8 @@ const MS = [
   {id:'s3', em:'🍯', n:'Mayones',  h:0},
   {id:'s4', em:'🌶️', n:'Saus Pedas',    h:0},
   {id:'s5', em:'⚫', n:'Pisah Semua',    h:0},
+   {id:'s6', em:'🐳', n:'Pake cakalang',    h:0},
+   {id:'s7', em:'🐳', n:'No cakalang',    h:0},
 ];
 
 const STOK_AWAL = [
