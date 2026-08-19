@@ -32,8 +32,6 @@ const MS = [
   {id:'s3', em:'🍯', n:'Mayones',  h:0},
   {id:'s4', em:'🌶️', n:'Saus Pedas',    h:0},
   {id:'s5', em:'⚫', n:'Pisah Semua',    h:0},
-   {id:'s6', em:'🐳', n:'Pake cakalang',    h:0},
-   {id:'s7', em:'🐳', n:'No cakalang',    h:0},
 ];
 
 const STOK_AWAL = [
@@ -50,7 +48,7 @@ const STOK_AWAL = [
 ══════════════════════════════════════════ */
 let cP = {}, cT = {}, cS = {};
 let orders = [], exps = [], oCnt = 0;
-let selMat = 'Matang', selPay = 'Tunai';
+let selMat = 'Pake Cakalang', selPay = 'Tunai';
 let stokBahan = JSON.parse(JSON.stringify(STOK_AWAL));
 
 // Printer state
@@ -94,7 +92,7 @@ function loadData() {
     const d = JSON.parse(raw);
     cP = d.cP || {};  cT = d.cT || {};  cS = d.cS || {};
     orders = d.orders || [];  exps = d.exps || [];  oCnt = d.oCnt || 0;
-    selMat = d.selMat || 'Matang';
+    selMat = d.selMat || 'Pake Cakalang';
     selPay = d.selPay || 'Tunai';
     if (d.stokBahan) stokBahan = d.stokBahan;
     printerMethod = d.printerMethod || 'lan';
@@ -390,9 +388,9 @@ function confirmOrder() {
   // Reset state
   cP={}; cT={}; cS={};
   if(g('c_name')) g('c_name').value='';
-  selMat='Matang'; selPay='Tunai';
+  selMat='Pake Cakalang'; selPay='Tunai';
   document.querySelectorAll('.mc2').forEach(b=>b.classList.remove('sel'));
-  document.querySelector('.mc2[data-v="Matang"]').classList.add('sel');
+  document.querySelector('.mc2[data-v="Pake Cakalang"]').classList.add('sel');
   document.querySelectorAll('.pc2').forEach(b=>b.classList.remove('sel'));
   document.querySelector('.pc2[data-v="Tunai"]').classList.add('sel');
 
@@ -569,7 +567,7 @@ function buildReceiptHTML(order) {
   html += `</div>
     <div style="font-size:10px;color:#aaa">${L32}</div>
     <div style="margin:8px 0;font-size:12px">
-      <div style="display:flex;justify-content:space-between"><span>🔥 Kematangan:</span><strong>${order.mat}</strong></div>
+      <div style="display:flex;justify-content:space-between"><span>🔥 Saus Tambahan:</span><strong>${order.mat}</strong></div>
       <div style="display:flex;justify-content:space-between"><span>💳 Pembayaran:</span><strong>${order.pay}</strong></div>
     </div>
     <div style="font-size:10px;color:#aaa">${D32}</div>
@@ -591,7 +589,7 @@ function previewReceipt(order, mode) {
       pi:[{n:'Takoyaki Medium',q:2,h:18000}],
       ti:[{n:'Gurita',q:1,h:0}],
       si:[{n:'Mayo',q:1,h:0},{n:'Saus Takoyaki',q:1,h:0}],
-      sub:36000, porsi:2, mat:'Matang', pay:'Tunai'
+      sub:36000, porsi:2, mat:'Pake Cakalang', pay:'Tunai'
     };
   }
   g('receipt-content').innerHTML = buildReceiptHTML(order);
@@ -685,7 +683,7 @@ function buildEscPosBytes(order) {
 
   lines.push(
     enc.encode(L + '\n'),
-    enc.encode(`Matang : ${order.mat}\n`),
+    enc.encode(`Pake Cakalang : ${order.mat}\n`),
     enc.encode(`Bayar  : ${order.pay}\n`),
     enc.encode(D + '\n'),
     ESC_POS.BOLD_ON,
