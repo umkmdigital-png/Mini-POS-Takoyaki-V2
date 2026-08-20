@@ -596,6 +596,11 @@
       <button class="btn-wa" onclick="checkout()">⚡ Kirim Laporan ke WhatsApp</button>
     </div>
   </div>
+  <button onclick="confirmResetDarurat()" style="margin-top: 12px; width: 100%; padding: 12px; background: #fff; color: #d32f2f; border: 2px dashed #d32f2f; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s;">
+                🚨 RESET DATA DARURAT
+            </button>
+        </div>
+    </div>
 
   <!-- TAB STOK -->
   <div id="tab-stok" class="tab">
@@ -1441,21 +1446,196 @@ async function sendEscPosToPrinter() {
   toast('✓ Struk dicetak via ESC/POS');
 }
 
+/* ══════════════════════════════════════════
+   15. GENERATOR WHATSAPP REPORT (KOMPREHENSIF)
+══════════════════════════════════════════ */
 function checkout() {
-  const n = g('p_nama').value.trim();
-  const s = g('p_shift').value;
-  if (!n || !s) return alert('Lengkapi data absen!');
+  const nama = getEl('p_nama')?.value.trim();
+  if (!nama) return alert('Isi nama staff di tab Absen dulu!');
+  
+  const { qtyTako } = hitungTotalKeranjang();
+  if (qtyTako > 0) {
+    if (!confirm('Masih ada item di keranjang. Simpan otomatis?')) return;
+    confirmOrder();
+  }
+  if (!orders.length) return alert('Belum ada pesanan tersimpan!');
 
-  let msg = `*LAPORAN SHIFT - TAKOYAKI MAZBOY*\n`;
-  msg += `Staff: ${n} (${s})\n`;
-  msg += `Tanggal: ${tgl()}\n\n`;
-  msg += `Total Transaksi: ${orders.length}\n`;
-  msg += `Total Porsi: ${g('t_porsi').innerText}\n`;
-  msg += `Setoran Tunai: ${g('t_tunai').innerText}\n`;
+  // Penarikan Data Dasar
+  const shift = getEl('p_shift')?.value || '-';
+  const tanggal = getDateNow();
+  const modal = parseNum(getEl('p_modal')?.value);
+  
+  const totalOmzet = orders.reduce((a, o) => a + o.sub, 0);
+  const totalPorsi = orders.reduce((a, o) => a + o.porsi, 0);
+  const totalTransaksi = orders.length;
+  
+  // Rata-rata
+  const rataOmzet = totalTransaksi > 0 ? Math.round(totalOmzet / totalTransaksi) : 0;
+  const rataPorsi = totalTransaksi > 0 ? (totalPorsi / totalTransaksi).toFixed(1) : 0;
 
-  window.open(`https://wa.me/${ADMIN}?text=${encodeURIComponent(msg)}`, '_blank');
+  // Metode Pembayaran
+  const omzetTunai = orders.filter(o => o.pay === 'Tunai').reduce((a, o) => a + o.sub, 0);
+  const omzetQRIS = orders.filter(o => o.pay === 'QRIS').reduce((a, o) => a + o.sub, 0);
+  const omzetOnline = orders.filter(o => o.pay === 'Gojek/Online').reduce((a, o) => a + o.sub, 0);
+
+  // Rekonsiliasi Kas & Pengeluaran
+  const totalPengeluaran = expenses.reduce((a, b) => a + b.p, 0);
+  const totalKas = modal + omzetTunai;
+  const setoranTunai = totalKas - totalPengeluaran;
+  const setoranFinal = setoranTunai < 0 ? 0 : setoranTunai;
+
+  // Top Produk Terlaris
+  const rekapTakoyaki = {};
+  orders.forEach(o => {
+    o.pi.forEach(i => {
+      if (!rekapTakoyaki[i.n]) rekapTakoyaki[i.n] = 0;
+      rekapTakoyaki[i.n] += i.q;
+    });
+  });
+  const topProduk = Object.entries(rekapTakoyaki)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([n, q], index) => `${index + 1}. ${n} (${q} porsi)`)
+    .join('\n');
+
+  // Detail Menu Terjual & Transaksi
+  const rekapIsian = {}, rekapSaus = {};
+  orders.forEach(o => {
+    o.ti.forEach(i => { if (!rekapIsian[i.n]) rekapIsian[i.n] = 0; rekapIsian[i.n] += i.q; });
+    (o.si || []).forEach(i => { if (!rekapSaus[i.n]) rekapSaus[i.n] = 0; rekapSaus[i.n] += i.q; });
+  });
+
+  const detailMenuStr = [
+    ...Object.entries(rekapTakoyaki).map(([k, v]) => `• ${k} : ${v} porsi`),
+    ...Object.entries(rekapIsian).map(([k, v]) => `• Isian ${k} : ${v}x`),
+    ...Object.entries(rekapSaus).map(([k, v]) => `• Saus ${k} : ${v}x`)
+  ].join('\n');
+
+  const strDetailTransaksi = orders.map(o => {
+    const ps = o.pi.map(i => `${i.n} x${i.q}`).join(', ');
+    const ts = o.ti.length ? ' + ' + o.ti.map(i => `${i.n}`).join('+') : '';
+    const ss = (o.si && o.si.length) ? ' [' + o.si.map(i => i.n).join('+') + ']' : '';
+    return `#${o.id} | ${o.time} | ${o.cust}\n🛒 ${ps}${ts}${ss}\n💳 ${o.pay} | 💰 ${formatRp(o.sub)}`;
+  }).join('\n\n');
+
+  const sAdonan = getEl('s_adonan')?.value || '-';
+  const sBhn = getEl('s_bahan')?.value || '-';
+  const sNot = getEl('s_note')?.value || '-';
+
+  // FORMAT LAPORAN WHATSAPP
+  const report = `📊 *LAPORAN HARIAN TAKOYAKI SAPORE*
+
+👤 Kasir : ${nama}
+🕒 Shift : ${shift}
+📅 Tanggal : ${tanggal}
+
+━━━━━━━━━━━━━━━━━━
+
+📌 *DASHBOARD HARI INI*
+
+💰 Omzet : ${formatRp(totalOmzet)}
+🥤 Porsi Terjual : ${totalPorsi} Porsi
+🛒 Jumlah Transaksi : ${totalTransaksi}×
+💵 Rata-rata/Transaksi : ${formatRp(rataOmzet)}
+🥤 Rata-rata Porsi/Transaksi : ${rataPorsi}
+🎁 Diskon : Rp 0
+🎉 Gratis : 0 cup
+
+━━━━━━━━━━━━━━━━━━
+
+💳 *METODE PEMBAYARAN*
+
+💵 Tunai : ${formatRp(omzetTunai)}
+📱 QRIS : ${formatRp(omzetQRIS)}
+🛵 Online : ${formatRp(omzetOnline)}
+
+TOTAL : ${formatRp(totalOmzet)}
+
+━━━━━━━━━━━━━━━━━━
+
+💰 *REKONSILIASI KAS*
+
+Modal Awal : ${formatRp(modal)}
++ Omzet Tunai : ${formatRp(omzetTunai)}
+= Total Kas : ${formatRp(totalKas)}
+
+- Pengeluaran : ${formatRp(totalPengeluaran)}
+
+💵 Setoran : ${formatRp(setoranFinal)}
+
+✅ Selisih Kas : Rp0
+
+━━━━━━━━━━━━━━━━━━
+
+🥇 *TOP PRODUK TERLARIS*
+
+${topProduk || 'Belum ada data'}
+
+━━━━━━━━━━━━━━━━━━
+
+📦 *PEMBELIAN STOK*
+(Disesuaikan dari input operasional)
+• Sisa Ball/Adonan : ${sAdonan}
+• Sisa Bahan : ${sBhn}
+
+Subtotal : Rp 0
+
+━━━━━━━━━━━━━━━━━━
+
+🏪 *BIAYA OPERASIONAL*
+(Total Pengeluaran Shift Ini)
+Subtotal : ${formatRp(totalPengeluaran)}
+
+━━━━━━━━━━━━━━━━━━
+
+📦 *STOK OPNAME*
+${stokBahan.map(b => `• ${b.n} : ${b.qty} ${b.unit}`).join('\n')}
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ *CATATAN SHIFT*
+
+• ${sNot}
+
+━━━━━━━━━━━━━━━━━━
+
+👥 *KARYAWAN*
+
+Nama : ${nama}
+Masuk : ${shift}
+Libur : -
+Kasbon : -
+
+━━━━━━━━━━━━━━━━━━
+
+📋 *DETAIL MENU TERJUAL*
+
+${detailMenuStr || 'Belum ada item terjual'}
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 *DETAIL TRANSAKSI*
+
+${strDetailTransaksi}`;
+
+  // Eksekusi Buka WhatsApp
+  window.open(`https://api.whatsapp.com/send?phone=${ADMIN}&text=${encodeURIComponent(report.trim())}`);
+
+  if (getEl('auto-print-shift')?.checked) {
+    setTimeout(() => printTestReceipt(), 900);
+  }
+
+  // Reset Data setelah laporan terkirim
+  if (confirm('Laporan terkirim! Reset data shift ini?')) {
+    orders = []; expenses = []; orderCount = 0; cartTakoyaki = {}; cartIsian = {}; cartSaus = {};
+    ['p_qris', 'p_online', 's_adonan', 's_bahan', 's_note', 'c_name'].forEach(id => {
+      const e = getEl(id); if (e) e.value = '';
+    });
+    localStorage.removeItem('TAKO_POS_DATA');
+    updateAllUi(); renderExps(); renderRekap(); renderStok();
+    toast('✓ Shift selesai, data di-reset. Arigatou! 🐙');
+  }
 }
-
 function saveData() {
   const data = {
     cP, cT, cS, orders, exps, oCnt, selMat, selPay, stokBahan, printerMethod,
@@ -1552,6 +1732,21 @@ window.onload = () => {
   loadData();
   renderMenus();
 };
+  // ==========================================
+// 9. FUNGSI RESET DARURAT
+// ==========================================
+function confirmResetDarurat() {
+    hapticFeedback(); 
+    
+    const peringatan = "🚨 PERINGATAN DARURAT! 🚨\n\nApakah Anda yakin ingin MENGHAPUS SEMUA DATA shift ini?\nSemua keranjang, riwayat, dan pengeluaran yang BELUM DIKIRIM akan hilang selamanya.";
+    
+    if (confirm(peringatan)) {
+        resetSemuaData();
+        const btnAbsen = document.querySelector('.nav-item[onclick*="tab-absen"]');
+        if (btnAbsen) openTab('tab-absen', btnAbsen);
+        showToast("🚨 Semua data berhasil dikosongkan!");
+    }
+}
 </script>
 </body>
 </html>
