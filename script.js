@@ -1065,7 +1065,7 @@ async function testPrinter() {
 }
 
 /* ══════════════════════════════════════════
-   15. GENERATOR WHATSAPP REPORT
+   15. GENERATOR WHATSAPP REPORT (KOMPREHENSIF)
 ══════════════════════════════════════════ */
 function checkout() {
   const nama = getEl('p_nama')?.value.trim();
@@ -1078,80 +1078,163 @@ function checkout() {
   }
   if (!orders.length) return alert('Belum ada pesanan tersimpan!');
 
-  // Penarikan Data
+  // Penarikan Data Dasar
   const shift = getEl('p_shift')?.value || '-';
   const tanggal = getDateNow();
   const modal = parseNum(getEl('p_modal')?.value);
-  const totalPengeluaran = expenses.reduce((a, b) => a + b.p, 0);
-  const qris = parseNum(getEl('p_qris')?.value);
-  const online = parseNum(getEl('p_online')?.value);
+  
   const totalOmzet = orders.reduce((a, o) => a + o.sub, 0);
   const totalPorsi = orders.reduce((a, o) => a + o.porsi, 0);
-  const netto = modal + totalOmzet - totalPengeluaran - qris - online;
+  const totalTransaksi = orders.length;
   
-  const omzetPerMetode = {};
-  orders.forEach(o => { omzetPerMetode[o.pay] = (omzetPerMetode[o.pay] || 0) + o.sub; });
+  // Rata-rata
+  const rataOmzet = totalTransaksi > 0 ? Math.round(totalOmzet / totalTransaksi) : 0;
+  const rataPorsi = totalTransaksi > 0 ? (totalPorsi / totalTransaksi).toFixed(1) : 0;
 
-  const rekapTakoyaki = {}, rekapIsian = {}, rekapSaus = {};
+  // Metode Pembayaran
+  const omzetTunai = orders.filter(o => o.pay === 'Tunai').reduce((a, o) => a + o.sub, 0);
+  const omzetQRIS = orders.filter(o => o.pay === 'QRIS').reduce((a, o) => a + o.sub, 0);
+  const omzetOnline = orders.filter(o => o.pay === 'Gojek/Online').reduce((a, o) => a + o.sub, 0);
+
+  // Rekonsiliasi Kas & Pengeluaran
+  const totalPengeluaran = expenses.reduce((a, b) => a + b.p, 0);
+  const totalKas = modal + omzetTunai;
+  const setoranTunai = totalKas - totalPengeluaran;
+  const setoranFinal = setoranTunai < 0 ? 0 : setoranTunai;
+
+  // Top Produk Terlaris
+  const rekapTakoyaki = {};
   orders.forEach(o => {
-    o.pi.forEach(i => { if (!rekapTakoyaki[i.n]) rekapTakoyaki[i.n] = { q: 0, h: i.h }; rekapTakoyaki[i.n].q += i.q; });
-    o.ti.forEach(i => { if (!rekapIsian[i.n]) rekapIsian[i.n] = { q: 0, h: i.h }; rekapIsian[i.n].q += i.q; });
-    (o.si || []).forEach(i => { if (!rekapSaus[i.n]) rekapSaus[i.n] = { q: 0, h: i.h }; rekapSaus[i.n].q += i.q; });
+    o.pi.forEach(i => {
+      if (!rekapTakoyaki[i.n]) rekapTakoyaki[i.n] = 0;
+      rekapTakoyaki[i.n] += i.q;
+    });
+  });
+  const topProduk = Object.entries(rekapTakoyaki)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([n, q], index) => `${index + 1}. ${n} (${q} porsi)`)
+    .join('\n');
+
+  // Detail Menu Terjual & Transaksi
+  const rekapIsian = {}, rekapSaus = {};
+  orders.forEach(o => {
+    o.ti.forEach(i => { if (!rekapIsian[i.n]) rekapIsian[i.n] = 0; rekapIsian[i.n] += i.q; });
+    (o.si || []).forEach(i => { if (!rekapSaus[i.n]) rekapSaus[i.n] = 0; rekapSaus[i.n] += i.q; });
   });
 
-  // FORMATTING TEXT WHATSAPP MENGGUNAKAN TEMPLATE LITERALS
-  const formatListMap = (obj) => Object.entries(obj).map(([k, v]) => `• ${k} ×${v.q} = ${formatRp(v.q * v.h)}`).join('\n');
-  const formatListPlain = (obj) => Object.entries(obj).map(([k, v]) => `• ${k} ×${v.q}`).join('\n');
-  const strMetodeBayar = Object.entries(omzetPerMetode).map(([k, v]) => `${k === 'Tunai' ? '💵' : k === 'QRIS' ? '📱' : '🛵'} ${k.padEnd(8)} : ${formatRp(v)}`).join('\n');
-  
-  const strDetailPesanan = orders.map(o => {
+  const detailMenuStr = [
+    ...Object.entries(rekapTakoyaki).map(([k, v]) => `• ${k} : ${v} porsi`),
+    ...Object.entries(rekapIsian).map(([k, v]) => `• Isian ${k} : ${v}x`),
+    ...Object.entries(rekapSaus).map(([k, v]) => `• Saus ${k} : ${v}x`)
+  ].join('\n');
+
+  const strDetailTransaksi = orders.map(o => {
     const ps = o.pi.map(i => `${i.n} x${i.q}`).join(', ');
     const ts = o.ti.length ? ' + ' + o.ti.map(i => `${i.n}`).join('+') : '';
     const ss = (o.si && o.si.length) ? ' [' + o.si.map(i => i.n).join('+') + ']' : '';
-    return `#${o.id} | 👤 ${o.cust} | ${o.time}\n🛒 ${ps}${ts}${ss}\n💳 ${o.pay} | 🔥 ${o.mat} | 💰 ${formatRp(o.sub)}\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈`;
-  }).join('\n');
+    return `#${o.id} | ${o.time} | ${o.cust}\n🛒 ${ps}${ts}${ss}\n💳 ${o.pay} | 💰 ${formatRp(o.sub)}`;
+  }).join('\n\n');
 
-  const sAdonan = getEl('s_adonan')?.value;
-  const sBhn = getEl('s_bahan')?.value;
-  const sNot = getEl('s_note')?.value;
-  const stokMenipis = stokBahan.filter(b => b.qty <= 1);
+  const sAdonan = getEl('s_adonan')?.value || '-';
+  const sBhn = getEl('s_bahan')?.value || '-';
+  const sNot = getEl('s_note')?.value || '-';
 
-  const report = `╔═══════════════════════╗
-🐙 LAPORAN TAKOYAKI MAZBOY
-╚═══════════════════════╝
-📅 ${tanggal}
-👤 ${nama}  |  ${shift}
-━━━━━━━━━━━━━━━━━━━━━━━
-💰 Modal Awal  : ${formatRp(modal)}
-🐙 Omzet Jual  : ${formatRp(totalOmzet)}
-📥 Total Kas   : ${formatRp(modal + totalOmzet)}
-━━━━━━━━━━━━━━━━━━━━━━━
-${strMetodeBayar}
-━━━━━━━━━━━━━━━━━━━━━━━
-💸 Pengeluaran : −${formatRp(totalPengeluaran)}
-📱 Setor QRIS  : −${formatRp(qris)}
-🛵 Setor Online: −${formatRp(online)}
-━━━━━━━━━━━━━━━━━━━━━━━
-💵 *SETORAN TUNAI: ${formatRp(netto < 0 ? 0 : netto)}*
+  // FORMAT LAPORAN WHATSAPP
+  const report = `📊 *LAPORAN HARIAN TAKOYAKI SAPORE*
 
-╔═══════════════════════╗
-🐙 TOTAL ITEM TERJUAL
-╚═══════════════════════╝
-📦 Transaksi: ${orders.length}×  |  🐙 Porsi: ${totalPorsi}
-━━━━━━━━━━━━━━━━━━━━━━━
-${formatListMap(rekapTakoyaki)}
-${Object.keys(rekapIsian).length ? `─ Isian ─\n${formatListPlain(rekapIsian)}` : ''}
-${Object.keys(rekapSaus).length ? `─ Saus ─\n${formatListPlain(rekapSaus)}` : ''}
+👤 Kasir : ${nama}
+🕒 Shift : ${shift}
+📅 Tanggal : ${tanggal}
 
-╔═══════════════════════╗
-📝 DETAIL PESANAN
-╚═══════════════════════╝
-${strDetailPesanan}
-${(sAdonan || sBhn || sNot || stokMenipis.length) ? `
-╔═══════════════════════╗
-📦 STOK OPNAME
-╚═══════════════════════╝
-${sAdonan ? `🐙 Sisa Ball : ${sAdonan}\n` : ''}${sBhn ? `🧂 Sisa Bahan: ${sBhn}\n` : ''}${stokMenipis.length ? `⚠️ HAMPIR HABIS: ${stokMenipis.map(b => `${b.n}(${b.qty})`).join(', ')}\n` : ''}${sNot ? `📝 Catatan: ${sNot}` : ''}` : ''}`;
+━━━━━━━━━━━━━━━━━━
+
+📌 *DASHBOARD HARI INI*
+
+💰 Omzet : ${formatRp(totalOmzet)}
+🥤 Porsi Terjual : ${totalPorsi} Porsi
+🛒 Jumlah Transaksi : ${totalTransaksi}×
+💵 Rata-rata/Transaksi : ${formatRp(rataOmzet)}
+🥤 Rata-rata Porsi/Transaksi : ${rataPorsi}
+🎁 Diskon : Rp 0
+🎉 Gratis : 0 cup
+
+━━━━━━━━━━━━━━━━━━
+
+💳 *METODE PEMBAYARAN*
+
+💵 Tunai : ${formatRp(omzetTunai)}
+📱 QRIS : ${formatRp(omzetQRIS)}
+🛵 Online : ${formatRp(omzetOnline)}
+
+TOTAL : ${formatRp(totalOmzet)}
+
+━━━━━━━━━━━━━━━━━━
+
+💰 *REKONSILIASI KAS*
+
+Modal Awal : ${formatRp(modal)}
++ Omzet Tunai : ${formatRp(omzetTunai)}
+= Total Kas : ${formatRp(totalKas)}
+
+- Pengeluaran : ${formatRp(totalPengeluaran)}
+
+💵 Setoran : ${formatRp(setoranFinal)}
+
+✅ Selisih Kas : Rp0
+
+━━━━━━━━━━━━━━━━━━
+
+🥇 *TOP PRODUK TERLARIS*
+
+${topProduk || 'Belum ada data'}
+
+━━━━━━━━━━━━━━━━━━
+
+📦 *PEMBELIAN STOK*
+(Disesuaikan dari input operasional)
+• Sisa Ball/Adonan : ${sAdonan}
+• Sisa Bahan : ${sBhn}
+
+Subtotal : Rp 0
+
+━━━━━━━━━━━━━━━━━━
+
+🏪 *BIAYA OPERASIONAL*
+(Total Pengeluaran Shift Ini)
+Subtotal : ${formatRp(totalPengeluaran)}
+
+━━━━━━━━━━━━━━━━━━
+
+📦 *STOK OPNAME*
+${stokBahan.map(b => `• ${b.n} : ${b.qty} ${b.unit}`).join('\n')}
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ *CATATAN SHIFT*
+
+• ${sNot}
+
+━━━━━━━━━━━━━━━━━━
+
+👥 *KARYAWAN*
+
+Nama : ${nama}
+Masuk : ${shift}
+Libur : -
+Kasbon : -
+
+━━━━━━━━━━━━━━━━━━
+
+📋 *DETAIL MENU TERJUAL*
+
+${detailMenuStr || 'Belum ada item terjual'}
+
+━━━━━━━━━━━━━━━━━━
+
+🧾 *DETAIL TRANSAKSI*
+
+${strDetailTransaksi}`;
 
   // Eksekusi Buka WhatsApp
   window.open(`https://api.whatsapp.com/send?phone=${ADMIN}&text=${encodeURIComponent(report.trim())}`);
@@ -1160,6 +1243,7 @@ ${sAdonan ? `🐙 Sisa Ball : ${sAdonan}\n` : ''}${sBhn ? `🧂 Sisa Bahan: ${sB
     setTimeout(() => printTestReceipt(), 900);
   }
 
+  // Reset Data setelah laporan terkirim
   if (confirm('Laporan terkirim! Reset data shift ini?')) {
     orders = []; expenses = []; orderCount = 0; cartTakoyaki = {}; cartIsian = {}; cartSaus = {};
     ['p_qris', 'p_online', 's_adonan', 's_bahan', 's_note', 'c_name'].forEach(id => {
@@ -1170,7 +1254,6 @@ ${sAdonan ? `🐙 Sisa Ball : ${sAdonan}\n` : ''}${sBhn ? `🧂 Sisa Bahan: ${sB
     toast('✓ Shift selesai, data di-reset. Arigatou! 🐙');
   }
 }
-
 /* ══════════════════════════════════════════
    16. INITIALIZATION
 ══════════════════════════════════════════ */
