@@ -9,55 +9,21 @@
     /* ─── ROOT & RESET ─── */
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     :root{
-      --ink:#0D0D0D;
-      --ink2:#1A1A2E;
-      --ink3:#6B6B8A;
-      --red:#E8003D;
-      --red2:#FF1A5E;
-      --red-light:#FFF0F4;
-      --orange:#FF6B35;
-      --gold:#FFB800;
-      --cream:#F7F5F0;
-      --cream2:#FFFFFF;
-      --border:#E0DDD5;
-      --parchment:#EEEBE3;
-      --blue:#1A237E;
-      --blue-light:#E8EAF6;
-      --green:#1B5E20;
-      --green-light:#E8F5E9;
-      --shadow:0 4px 24px rgba(13,13,13,.14);
-      --shadow-sm:0 2px 10px rgba(13,13,13,.08);
-      --jp-red:#C62828;
+      --ink:#0D0D0D; --ink2:#1A1A2E; --ink3:#6B6B8A;
+      --red:#E8003D; --red2:#FF1A5E; --red-light:#FFF0F4;
+      --orange:#FF6B35; --gold:#FFB800;
+      --cream:#F7F5F0; --cream2:#FFFFFF; --border:#E0DDD5; --parchment:#EEEBE3;
+      --blue:#1A237E; --blue-light:#E8EAF6;
+      --green:#1B5E20; --green-light:#E8F5E9;
+      --shadow:0 4px 24px rgba(13,13,13,.14); --shadow-sm:0 2px 10px rgba(13,13,13,.08);
     }
     html{scroll-behavior:smooth}
-    body{
-      font-family:'Nunito',system-ui,sans-serif;
-      background:var(--cream);
-      color:var(--ink);
-      padding-bottom:140px;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
+    body{font-family:'Nunito',system-ui,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:140px;min-height:100vh;overflow-x:hidden;}
 
     /* ─── HEADER ─── */
-    .hdr{
-      background:var(--ink2);
-      text-align:center;
-      padding:24px 20px 20px;
-      position:relative;overflow:hidden;
-    }
-    .hdr::before{
-      content:'';position:absolute;inset:0;
-      background:
-        radial-gradient(ellipse at 20% 50%,rgba(232,0,61,.3) 0%,transparent 50%),
-        radial-gradient(ellipse at 80% 30%,rgba(255,184,0,.15) 0%,transparent 50%);
-      pointer-events:none;
-    }
-    .hdr-pattern{
-      position:absolute;inset:0;opacity:.05;
-      background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);
-      background-size:12px 12px;pointer-events:none;
-    }
+    .hdr{background:var(--ink2);text-align:center;padding:24px 20px 20px;position:relative;overflow:hidden;}
+    .hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(232,0,61,.3) 0%,transparent 50%),radial-gradient(ellipse at 80% 30%,rgba(255,184,0,.15) 0%,transparent 50%);pointer-events:none;}
+    .hdr-pattern{position:absolute;inset:0;opacity:.05;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:12px 12px;pointer-events:none;}
     .hdr-icon{font-size:44px;display:block;margin-bottom:4px;animation:spin 4s ease-in-out infinite;filter:drop-shadow(0 3px 12px rgba(232,0,61,.5));position:relative;z-index:1;}
     @keyframes spin{0%,100%{transform:rotate(-5deg) scale(1)}50%{transform:rotate(5deg) scale(1.07)}}
     .hdr-jp{font-family:'Noto Serif JP',serif;font-size:11px;letter-spacing:6px;color:rgba(255,255,255,.4);text-transform:uppercase;position:relative;z-index:1;margin-bottom:3px;}
@@ -69,31 +35,10 @@
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
     /* ─── NAV ─── */
-    .nav{
-      position:fixed;bottom:0;left:0;right:0;
-      background:var(--ink2);
-      display:flex;z-index:500;
-      border-top:2px solid rgba(255,255,255,.08);
-      box-shadow:0 -4px 24px rgba(0,0,0,.4);
-    }
-    .nav-btn{
-      flex:1;padding:9px 4px 7px;
-      border:none;background:none;
-      color:rgba(255,255,255,.35);
-      font-size:9.5px;font-weight:800;
-      font-family:'Nunito',sans-serif;
-      text-transform:uppercase;letter-spacing:.5px;
-      cursor:pointer;
-      display:flex;flex-direction:column;align-items:center;gap:3px;
-      transition:color .2s;
-    }
+    .nav{position:fixed;bottom:0;left:0;right:0;background:var(--ink2);display:flex;z-index:500;border-top:2px solid rgba(255,255,255,.08);box-shadow:0 -4px 24px rgba(0,0,0,.4);}
+    .nav-btn{flex:1;padding:9px 4px 7px;border:none;background:none;color:rgba(255,255,255,.35);font-size:9.5px;font-weight:800;font-family:'Nunito',sans-serif;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;}
     .nav-btn .ico{font-size:20px;line-height:1}
-    .nav-btn.on{
-      color:#FFFFFF;
-      border-top:3px solid var(--red);
-      margin-top:-2px;
-      background:rgba(232,0,61,.12);
-    }
+    .nav-btn.on{color:#FFFFFF;border-top:3px solid var(--red);margin-top:-2px;background:rgba(232,0,61,.12);}
 
     /* ─── LAYOUT ─── */
     .wrap{padding:14px;max-width:520px;margin:0 auto}
@@ -101,30 +46,13 @@
     .tab.on{display:block}
 
     /* ─── CARDS ─── */
-    .card{
-      background:var(--cream2);
-      border-radius:18px;padding:18px;
-      margin-bottom:14px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow-sm);
-      animation:rise .3s ease both;
-    }
+    .card{background:var(--cream2);border-radius:18px;padding:18px;margin-bottom:14px;border:1px solid var(--border);box-shadow:var(--shadow-sm);animation:rise .3s ease both;}
     @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .card-ttl{
-      font-family:'Noto Serif JP',serif;
-      font-size:14px;font-weight:700;
-      color:var(--ink2);
-      display:flex;align-items:center;gap:8px;
-      margin-bottom:14px;
-    }
+    .card-ttl{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--ink2);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
     .card-ttl::after{content:'';flex:1;height:1.5px;background:linear-gradient(90deg,var(--parchment),transparent);}
 
     /* ─── PROFILE CARD ─── */
-    .prof-card{
-      background:linear-gradient(135deg,var(--ink2) 0%,#0D0D2E 100%);
-      border-radius:20px;padding:20px;margin-bottom:14px;
-      box-shadow:var(--shadow);position:relative;overflow:hidden;
-    }
+    .prof-card{background:linear-gradient(135deg,var(--ink2) 0%,#0D0D2E 100%);border-radius:20px;padding:20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
     .prof-card::after{content:'🐙';position:absolute;right:-10px;top:-10px;font-size:100px;opacity:.06;transform:rotate(18deg);pointer-events:none;}
     .prof-hd{display:flex;align-items:center;gap:14px;margin-bottom:14px}
     .prof-av{width:56px;height:56px;background:rgba(232,0,61,.15);border:2.5px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
@@ -305,120 +233,29 @@
     .btn-wa:active{transform:scale(.97)}
 
     /* FORM CUSTOM MENU */
-    .manual-input-card {
-      background: #1e1e1e;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      border: 1px dashed #555;
-    }
-    .manual-input-card h4 {
-      margin-top: 0;
-      font-size: 14px;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .manual-input-card input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #333;
-      background: #2a2a2a;
-      color: #fff;
-    }
-    .manual-input-card button {
-      width: 100%;
-      padding: 10px;
-      background: #e8003d;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+    .manual-input-card {background: #1e1e1e;padding: 15px;border-radius: 8px;margin: 15px 0;border: 1px dashed #555;}
+    .manual-input-card h4 {margin-top: 0;font-size: 14px;color: #fff;margin-bottom: 10px;}
+    .manual-input-card input {width: 100%;margin-bottom: 10px;padding: 10px;border-radius: 5px;border: 1px solid #333;background: #2a2a2a;color: #fff;}
+    .manual-input-card button {width: 100%;padding: 10px;background: #e8003d;color: #fff;border: none;border-radius: 5px;cursor: pointer;font-weight: bold;}
 
     /* KALKULATOR MELAYANG */
-    .calc-trigger-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #e8003d;
-      color: #fff;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      z-index: 9998;
-    }
-    .floating-calculator {
-      position: fixed;
-      top: 15%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 320px;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      z-index: 9999;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      user-select: none;
-    }
+    .calc-trigger-btn {position: fixed;bottom: 20px;right: 20px;background: #e8003d;color: #fff;border: none;padding: 12px 18px;border-radius: 50px;font-weight: bold;cursor: pointer;box-shadow: 0 4px 15px rgba(0,0,0,0.3);z-index: 9998;}
+    .floating-calculator {position: fixed;top: 15%;left: 50%;transform: translateX(-50%);width: 320px;background: #1e1e1e;border: 1px solid #333;border-radius: 12px;box-shadow: 0 10px 30px rgba(0,0,0,0.5);z-index: 9999;overflow: hidden;font-family: Arial, sans-serif;user-select: none;}
     .floating-calculator.hidden { display: none; }
     .floating-calculator.minimized .calc-body { display: none; }
     .floating-calculator.minimized { width: 200px; }
-    .calc-header {
-      background: #2a2a2a;
-      padding: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: move;
-      border-bottom: 1px solid #333;
-    }
+    .calc-header {background: #2a2a2a;padding: 12px;display: flex;justify-content: space-between;align-items: center;cursor: move;border-bottom: 1px solid #333;}
     .calc-title { color: #fff; font-size: 14px; font-weight: bold; }
-    .calc-controls button {
-      background: transparent;
-      border: none;
-      color: #888;
-      font-size: 16px;
-      margin-left: 8px;
-      cursor: pointer;
-    }
-    .calc-screen {
-      background: #111;
-      padding: 20px;
-      text-align: right;
-      min-height: 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+    .calc-controls button {background: transparent;border: none;color: #888;font-size: 16px;margin-left: 8px;cursor: pointer;}
+    .calc-screen {background: #111;padding: 20px;text-align: right;min-height: 80px;display: flex;flex-direction: column;justify-content: flex-end;}
     .calc-history { color: #777; font-size: 14px; margin-bottom: 5px; }
     .calc-output { color: #fff; font-size: 32px; font-weight: bold; }
-    .calc-buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: #2a2a2a;
-    }
-    .btn {
-      border: none;
-      background: #1e1e1e;
-      color: #fff;
-      padding: 18px;
-      font-size: 18px;
-      cursor: pointer;
-    }
+    .calc-buttons {display: grid;grid-template-columns: repeat(4, 1fr);gap: 1px;background: #2a2a2a;}
+    .btn {border: none;background: #1e1e1e;color: #fff;padding: 18px;font-size: 18px;cursor: pointer;}
     .btn-action { color: #e8003d; }
     .btn-operator { color: #ff9f0a; }
     .btn-equals { background: #ff9f0a; color: #fff; }
     .btn-zero { grid-column: span 2; }
-
     .toggle{position:relative;display:inline-block;width:44px;height:24px}
     .toggle input{opacity:0;width:0;height:0}
     .t-slider{position:absolute;cursor:pointer;inset:0;background:var(--border);border-radius:24px;transition:.3s;}
@@ -452,7 +289,6 @@
             <div id="calc-history" class="calc-history"></div>
             <div id="calc-output" class="calc-output">0</div>
         </div>
-        
         <div class="calc-buttons">
             <button class="btn btn-action" data-action="clear">C</button>
             <button class="btn btn-action" data-action="backspace">⌫</button>
@@ -493,21 +329,11 @@
 
 <!-- BOTTOM NAV -->
 <nav class="nav">
-  <button class="nav-btn on" id="nb-absen" onclick="sw('absen',this)">
-    <span class="ico">📍</span>Absen
-  </button>
-  <button class="nav-btn" id="nb-jual" onclick="sw('jual',this)">
-    <span class="ico">🐙</span>Jualan
-  </button>
-  <button class="nav-btn" id="nb-stok" onclick="sw('stok',this)">
-    <span class="ico">📦</span>Stok
-  </button>
-  <button class="nav-btn" id="nb-printer" onclick="sw('printer',this)">
-    <span class="ico">🖨️</span>Printer
-  </button>
-  <button class="nav-btn" id="nb-rekap" onclick="sw('rekap',this)">
-    <span class="ico">📊</span>Rekap
-  </button>
+  <button class="nav-btn on" id="nb-absen" onclick="sw('absen',this)"><span class="ico">📍</span>Absen</button>
+  <button class="nav-btn" id="nb-jual" onclick="sw('jual',this)"><span class="ico">🐙</span>Jualan</button>
+  <button class="nav-btn" id="nb-stok" onclick="sw('stok',this)"><span class="ico">📦</span>Stok</button>
+  <button class="nav-btn" id="nb-printer" onclick="sw('printer',this)"><span class="ico">🖨️</span>Printer</button>
+  <button class="nav-btn" id="nb-rekap" onclick="sw('rekap',this)"><span class="ico">📊</span>Rekap</button>
 </nav>
 
 <div class="wrap">
@@ -595,12 +421,10 @@
       <div class="stor-row big"><span>Setoran TUNAI</span><strong id="t_tunai">Rp 0</strong></div>
       <button class="btn-wa" onclick="checkout()">⚡ Kirim Laporan ke WhatsApp</button>
     </div>
+    <button onclick="confirmResetDarurat()" style="margin-top: 12px; width: 100%; padding: 12px; background: #fff; color: #d32f2f; border: 2px dashed #d32f2f; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s;">
+      🚨 RESET DATA DARURAT
+    </button>
   </div>
-  <button onclick="confirmResetDarurat()" style="margin-top: 12px; width: 100%; padding: 12px; background: #fff; color: #d32f2f; border: 2px dashed #d32f2f; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s;">
-                🚨 RESET DATA DARURAT
-            </button>
-        </div>
-    </div>
 
   <!-- TAB STOK -->
   <div id="tab-stok" class="tab">
@@ -629,7 +453,6 @@
   <div id="tab-printer" class="tab">
     <div class="printer-card">
       <div class="printer-ttl">🖨️ Koneksi Printer</div>
-
       <div class="printer-status">
         <div class="p-dot" id="p-dot"></div>
         <div>
@@ -637,7 +460,6 @@
           <div class="p-status-sub" id="p-status-sub">Pilih metode koneksi di bawah</div>
         </div>
       </div>
-
       <div style="margin-bottom:12px">
         <span class="printer-label">Metode Koneksi</span>
         <div class="printer-method-row">
@@ -646,8 +468,6 @@
           <button class="pm-btn" id="pm-usb" onclick="setPrinterMethod('usb',this)">🔌 USB</button>
         </div>
       </div>
-
-      <!-- LAN Settings -->
       <div id="lan-panel">
         <div style="margin-bottom:10px">
           <span class="printer-label">IP Address Printer</span>
@@ -658,66 +478,36 @@
           <input type="number" id="printer-port" class="printer-input" value="9100">
         </div>
       </div>
-
-      <!-- Bluetooth Settings View -->
       <div id="bt-panel" style="display:none">
-        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">
-          Pastikan Bluetooth aktif & printer thermal dalam mode pairing.
-        </p>
+        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">Pastikan Bluetooth aktif & printer thermal dalam mode pairing.</p>
         <button class="btn-printer" onclick="scanBluetoothPrinter()" style="margin-bottom:10px;width:100%">🔍 Cari Device Bluetooth</button>
         <div id="bt-device-list" style="margin-bottom:10px"></div>
       </div>
-
-      <!-- USB Settings -->
       <div id="usb-panel" style="display:none">
-        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">
-          Koneksi USB menggunakan Web USB API.
-        </p>
+        <p style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:12px;">Koneksi USB menggunakan Web USB API.</p>
       </div>
-
       <div class="printer-btns">
         <button class="btn-printer" onclick="testPrinter()">🔍 Test Koneksi</button>
         <button class="btn-printer primary" onclick="connectPrinter()">⚡ Hubungkan</button>
       </div>
-
       <div class="printer-log" id="printer-log">[ Printer log akan muncul di sini ]</div>
     </div>
-
     <div class="card">
       <div class="card-ttl">🧾 Pengaturan Struk</div>
-      <div class="fgrp">
-        <label>Nama Toko (Header Struk)</label>
-        <input type="text" id="r_nama_toko" value="Takoyaki Mazboy">
-      </div>
-      <div class="fgrp">
-        <label>Alamat / Lokasi</label>
-        <input type="text" id="r_alamat" value="Outlet Kalibaru">
-      </div>
-      <div class="fgrp">
-        <label>Pesan Footer</label>
-        <input type="text" id="r_footer" value="Terima kasih! Arigato! 🐙">
-      </div>
-      <div class="fgrp">
-        <label>No. WhatsApp / Kontak</label>
-        <input type="text" id="r_kontak" value="">
-      </div>
-
+      <div class="fgrp"><label>Nama Toko (Header Struk)</label><input type="text" id="r_nama_toko" value="Takoyaki Mazboy"></div>
+      <div class="fgrp"><label>Alamat / Lokasi</label><input type="text" id="r_alamat" value="Outlet Kalibaru"></div>
+      <div class="fgrp"><label>Pesan Footer</label><input type="text" id="r_footer" value="Terima kasih! Arigato! 🐙"></div>
+      <div class="fgrp"><label>No. WhatsApp / Kontak</label><input type="text" id="r_kontak" value=""></div>
       <div style="display:flex;gap:10px;margin-top:4px">
         <button class="btn-main" style="font-size:13px;padding:12px" onclick="previewReceipt(null,'preview')">👁 Preview Struk</button>
         <button class="btn-main" style="font-size:13px;padding:12px;background:linear-gradient(135deg,#1B5E20,#2E7D32)" onclick="printTestReceipt()">🖨 Test Print</button>
       </div>
     </div>
-
     <div class="card">
       <div class="card-ttl">⚙️ Opsi Cetak Otomatis</div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--border)">
-        <div>
-          <div style="font-size:14px;font-weight:700">Auto-cetak saat pesanan disimpan</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="auto-print" onchange="saveData()">
-          <span class="t-slider"></span>
-        </label>
+        <div style="font-size:14px;font-weight:700">Auto-cetak saat pesanan disimpan</div>
+        <label class="toggle"><input type="checkbox" id="auto-print" onchange="saveData()"><span class="t-slider"></span></label>
       </div>
     </div>
   </div>
@@ -730,15 +520,11 @@
     </div>
     <div id="rlist"></div>
   </div>
-
 </div>
 
 <!-- FLOATING CART -->
 <button id="fcart" onclick="openM()">
-  <div class="fcart-l">
-    <span class="fcart-bubble" id="fc-cnt">0</span>
-    <span id="fc-lbl">porsi di keranjang</span>
-  </div>
+  <div class="fcart-l"><span class="fcart-bubble" id="fc-cnt">0</span><span id="fc-lbl">porsi di keranjang</span></div>
   <span class="fcart-r" id="fc-tot">Rp 0</span>
 </button>
 
@@ -747,30 +533,17 @@
   <div id="modal">
     <div class="m-handle"></div>
     <div class="m-hdr">
-      <div>
-        <div class="m-title">🐙 Keranjang Pesanan</div>
-        <div class="m-sub" id="m-sub">Pesanan baru</div>
-      </div>
-      <div class="m-hdr-r">
-        <span class="porsi-chip" id="m-chip">0 porsi</span>
-        <button class="btn-x" onclick="closeM()">✕</button>
-      </div>
+      <div><div class="m-title">🐙 Keranjang Pesanan</div><div class="m-sub" id="m-sub">Pesanan baru</div></div>
+      <div class="m-hdr-r"><span class="porsi-chip" id="m-chip">0 porsi</span><button class="btn-x" onclick="closeM()">✕</button></div>
     </div>
     <div class="m-scroll">
       <div class="pil-block">
         <div class="pil-ttl">👤 Nama Pelanggan</div>
         <input type="text" id="c_name" placeholder="Masukkan nama pelanggan..." style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);font-size:15px;margin-top:8px;outline:none;">
       </div>
-      <div class="m-sec-lbl">🐙 Menu Takoyaki</div>
-      <div id="ml-menu"></div>
-      <div id="ml-top-wrap" style="display:none">
-        <div class="m-sec-lbl">🧄 Topping</div>
-        <div id="ml-topping"></div>
-      </div>
-      <div id="ml-sauce-wrap" style="display:none">
-        <div class="m-sec-lbl">🍯 Saus</div>
-        <div id="ml-sauce"></div>
-      </div>
+      <div class="m-sec-lbl">🐙 Menu Takoyaki</div><div id="ml-menu"></div>
+      <div id="ml-top-wrap" style="display:none"><div class="m-sec-lbl">🧄 Topping</div><div id="ml-topping"></div></div>
+      <div id="ml-sauce-wrap" style="display:none"><div class="m-sec-lbl">🍯 Saus</div><div id="ml-sauce"></div></div>
       <div class="pil-block">
         <div class="pil-ttl">🌶 Saus & Cakalang</div>
         <div class="mat-row">
@@ -788,12 +561,7 @@
       </div>
     </div>
     <div class="m-foot">
-      <div class="m-tot-row">
-        <div>
-          <div class="m-tot-lbl">Subtotal pesanan ini</div>
-          <div class="m-tot-amt" id="m-tot">Rp 0</div>
-        </div>
-      </div>
+      <div class="m-tot-row"><div><div class="m-tot-lbl">Subtotal pesanan ini</div><div class="m-tot-amt" id="m-tot">Rp 0</div></div></div>
       <div class="m-btns">
         <button class="btn-rst" onclick="resetCart()">🗑 Reset</button>
         <button class="btn-ok" onclick="confirmOrder()">✓ Simpan + Cetak</button>
@@ -827,31 +595,19 @@ const MP = [
   {id:'m4', em:'🎁', n:'Gratis', h:0, badge:'FREE'},
 ];
 const MT = [
-  {id:'t1', em:'🧀', n:'Keju', h:0},
-  {id:'t2', em:'🥚', n:'Telur Puyuh', h:0},
-  {id:'t3', em:'🍗', n:'Ayam', h:0},
-  {id:'t4', em:'🐙', n:'Gurita', h:0},
-  {id:'t5', em:'🍳', n:'Eggroll', h:0},
-  {id:'t6', em:'🥯', n:'Cikuwa', h:0},
-  {id:'t7', em:'🥓', n:'Kornet', h:0},
-  {id:'t8', em:'🦀', n:'Crabstick', h:0},
-  {id:'t9', em:'🌭', n:'Sosis', h:0},
+  {id:'t1', em:'🧀', n:'Keju', h:0},{id:'t2', em:'🥚', n:'Telur Puyuh', h:0},{id:'t3', em:'🍗', n:'Ayam', h:0},
+  {id:'t4', em:'🐙', n:'Gurita', h:0},{id:'t5', em:'🍳', n:'Eggroll', h:0},{id:'t6', em:'🥯', n:'Cikuwa', h:0},
+  {id:'t7', em:'🥓', n:'Kornet', h:0},{id:'t8', em:'🦀', n:'Crabstick', h:0},{id:'t9', em:'🌭', n:'Sosis', h:0},
 ];
 const MS = [
-  {id:'s1', em:'🧀', n:'Keju', h:3000},
-  {id:'s2', em:'🍡', n:'Saus takoyaki', h:0},
-  {id:'s3', em:'🍯', n:'Mayones', h:0},
-  {id:'s4', em:'🌶️', n:'Saus Pedas', h:0},
-  {id:'s5', em:'⚫', n:'Pisah Semua', h:0},
+  {id:'s1', em:'🧀', n:'Keju', h:3000},{id:'s2', em:'🍡', n:'Saus takoyaki', h:0},
+  {id:'s3', em:'🍯', n:'Mayones', h:0},{id:'s4', em:'🌶️', n:'Saus Pedas', h:0},{id:'s5', em:'⚫', n:'Pisah Semua', h:0},
 ];
 
 const STOK_AWAL = [
-  { n:'Adonan Tepung', unit:'kg', qty:5 },
-  { n:'Gurita / Cumi', unit:'kg', qty:2 },
-  { n:'Saus Takoyaki', unit:'btl', qty:3 },
-  { n:'Mayo', unit:'btl', qty:4 },
-  { n:'Katsuobushi', unit:'pck', qty:5 },
-  { n:'Gas LPG', unit:'tab', qty:2 },
+  { n:'Adonan Tepung', unit:'kg', qty:5 },{ n:'Gurita / Cumi', unit:'kg', qty:2 },
+  { n:'Saus Takoyaki', unit:'btl', qty:3 },{ n:'Mayo', unit:'btl', qty:4 },
+  { n:'Katsuobushi', unit:'pck', qty:5 },{ n:'Gas LPG', unit:'tab', qty:2 },
 ];
 
 let cP = {}, cT = {}, cS = {};
@@ -861,10 +617,7 @@ let stokBahan = JSON.parse(JSON.stringify(STOK_AWAL));
 
 let printerMethod = 'lan';
 let printerConnected = false;
-let btDevice = null;
-let btCharacteristic = null;
-let selectedBtDevice = null;
-let usbDevice = null;
+let btDevice = null, btCharacteristic = null, selectedBtDevice = null, usbDevice = null;
 
 const g = id => document.getElementById(id);
 const rp = n => 'Rp ' + n.toLocaleString('id-ID');
@@ -876,24 +629,15 @@ function fmt(el) {
   const v = el.value.replace(/[^0-9]/g,'');
   el.value = v ? 'Rp ' + parseInt(v).toLocaleString('id-ID') : '';
 }
-function setV(id, v) {
-  const e = g(id);
-  if (e && v !== undefined && v !== null) e.value = v;
-}
+function setV(id, v) { const e = g(id); if (e && v !== undefined && v !== null) e.value = v; }
 
 let _toastTimer;
 function toast(m, dur = 2200) {
-  const t = g('toast');
-  t.innerText = m;
-  t.classList.add('show');
-  clearTimeout(_toastTimer);
-  _toastTimer = setTimeout(() => t.classList.remove('show'), dur);
+  const t = g('toast'); t.innerText = m; t.classList.add('show');
+  clearTimeout(_toastTimer); _toastTimer = setTimeout(() => t.classList.remove('show'), dur);
 }
 
-setInterval(() => {
-  const e = g('clk');
-  if (e) e.innerText = new Date().toLocaleTimeString('id-ID');
-}, 1000);
+setInterval(() => { const e = g('clk'); if (e) e.innerText = new Date().toLocaleTimeString('id-ID'); }, 1000);
 
 function sw(id, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
@@ -905,102 +649,63 @@ function sw(id, btn) {
 }
 
 function updProf() {
-  const n = g('p_nama').value;
-  const r = g('p_shift').value;
-  g('dn').innerText = n || 'Nama Staff';
-  g('dr').innerText = r || 'Shift belum dipilih';
+  const n = g('p_nama').value, r = g('p_shift').value;
+  g('dn').innerText = n || 'Nama Staff'; g('dr').innerText = r || 'Shift belum dipilih';
 }
 
 function checkin() {
-  const n = g('p_nama').value.trim();
-  const s = g('p_shift').value;
+  const n = g('p_nama').value.trim(), s = g('p_shift').value;
   if (!n || !s) return alert('Lengkapi Nama & Shift dulu!');
   toast('✓ Check-in Berhasil! Itadakimasu! 🐙');
-  sw('jual', g('nb-jual'));
-  saveData();
+  sw('jual', g('nb-jual')); saveData();
 }
 
 function renderMenus() {
   const gm = g('gmenu'); gm.innerHTML = '';
   MP.forEach(m => {
     const q = cP[m.id]?.qty || 0;
-    const d = document.createElement('div');
-    d.className = 'mc' + (q ? ' hit' : '');
+    const d = document.createElement('div'); d.className = 'mc' + (q ? ' hit' : '');
     d.onclick = () => addP(m);
-    d.innerHTML = `
-      ${q ? `<span class="qb">${q}</span>` : ''}
-      <div class="mc-em">${m.em}</div>
-      <div class="mc-name">${m.n}</div>
-      <div class="mc-price">${m.h ? rp(m.h) : 'Gratis'}</div>
-      ${m.badge ? `<div class="mc-badge">${m.badge}</div>` : ''}`;
+    d.innerHTML = `${q ? `<span class="qb">${q}</span>` : ''}<div class="mc-em">${m.em}</div><div class="mc-name">${m.n}</div><div class="mc-price">${m.h ? rp(m.h) : 'Gratis'}</div>${m.badge ? `<div class="mc-badge">${m.badge}</div>` : ''}`;
     gm.appendChild(d);
   });
-
-  // Render Custom Menus jika ada
   for(const k in cP) {
     if(cP[k].isManual) {
-      const q = cP[k].qty;
-      const d = document.createElement('div');
-      d.className = 'mc' + (q ? ' hit' : '');
+      const q = cP[k].qty; const d = document.createElement('div'); d.className = 'mc' + (q ? ' hit' : '');
       d.onclick = () => { cP[k].qty++; upd(); };
-      d.innerHTML = `
-        ${q ? `<span class="qb">${q}</span>` : ''}
-        <div class="mc-em">⭐</div>
-        <div class="mc-name">${cP[k].n}</div>
-        <div class="mc-price">${rp(cP[k].h)}</div>`;
+      d.innerHTML = `${q ? `<span class="qb">${q}</span>` : ''}<div class="mc-em">⭐</div><div class="mc-name">${cP[k].n}</div><div class="mc-price">${rp(cP[k].h)}</div>`;
       gm.appendChild(d);
     }
   }
-
   const gt = g('gtopping'); gt.innerHTML = '';
   MT.forEach(m => {
-    const q = cT[m.id]?.qty || 0;
-    const d = document.createElement('div');
-    d.className = 'tp' + (q ? ' hit' : '');
+    const q = cT[m.id]?.qty || 0; const d = document.createElement('div'); d.className = 'tp' + (q ? ' hit' : '');
     d.onclick = () => addT(m);
-    d.innerHTML = `
-      ${q ? `<span class="qb">${q}</span>` : ''}
-      <span class="tp-em">${m.em}</span>
-      <div class="tp-name">${m.n}</div>
-      <div class="tp-price">${m.h ? rp(m.h) : 'Gratis'}</div>`;
+    d.innerHTML = `${q ? `<span class="qb">${q}</span>` : ''}<span class="tp-em">${m.em}</span><div class="tp-name">${m.n}</div><div class="tp-price">${m.h ? rp(m.h) : 'Gratis'}</div>`;
     gt.appendChild(d);
   });
-
   const gs = g('gsauce'); gs.innerHTML = '';
   MS.forEach(m => {
-    const q = cS[m.id]?.qty || 0;
-    const d = document.createElement('div');
-    d.className = 'sc' + (q ? ' hit' : '');
+    const q = cS[m.id]?.qty || 0; const d = document.createElement('div'); d.className = 'sc' + (q ? ' hit' : '');
     d.onclick = () => addS(m);
-    d.innerHTML = `
-      ${m.em} ${m.n} ${m.h ? '(+' + rp(m.h) + ')' : '(Gratis)'}
-      ${q ? `<span class="qb">${q}</span>` : ''}`;
+    d.innerHTML = `${m.em} ${m.n} ${m.h ? '(+' + rp(m.h) + ')' : '(Gratis)'}${q ? `<span class="qb">${q}</span>` : ''}`;
     gs.appendChild(d);
   });
 }
 
 function addManualMenu() {
-  const nameInput = g('manual_name');
-  const priceInput = g('manual_price');
-  const n = nameInput.value.trim();
-  const h = nn(priceInput.value);
-
+  const ni = g('manual_name'), pi = g('manual_price');
+  const n = ni.value.trim(), h = nn(pi.value);
   if (!n || h <= 0) return alert('Masukkan nama item dan harga yang valid!');
-
-  const id = 'manual_' + Date.now();
-  cP[id] = { qty: 1, h: h, n: n, isManual: true };
-
-  nameInput.value = '';
-  priceInput.value = '';
+  cP['manual_' + Date.now()] = { qty: 1, h: h, n: n, isManual: true };
+  ni.value = ''; pi.value = '';
   if(navigator.vibrate) navigator.vibrate(15);
-  toast('✓ Menu custom ditambahkan');
-  upd();
+  toast('✓ Menu custom ditambahkan'); upd();
 }
 
 function addP(m) { if(navigator.vibrate) navigator.vibrate(15); if(!cP[m.id]) cP[m.id]={qty:0,h:m.h,n:m.n}; cP[m.id].qty++; upd(); }
 function addT(m) { if(navigator.vibrate) navigator.vibrate(15); if(!cT[m.id]) cT[m.id]={qty:0,h:m.h,n:m.n}; cT[m.id].qty++; upd(); }
 function addS(m) { if(navigator.vibrate) navigator.vibrate(15); if(!cS[m.id]) cS[m.id]={qty:0,h:m.h,n:m.n}; cS[m.id].qty++; upd(); }
-
 function chP(id,d) { if(!cP[id]) return; cP[id].qty+=d; if(cP[id].qty<=0) delete cP[id]; upd(); updModal(); }
 function chT(id,d) { if(!cT[id]) return; cT[id].qty+=d; if(cT[id].qty<=0) delete cT[id]; upd(); updModal(); }
 function chS(id,d) { if(!cS[id]) return; cS[id].qty+=d; if(cS[id].qty<=0) delete cS[id]; upd(); updModal(); }
@@ -1014,40 +719,21 @@ function tots() {
 }
 
 function upd() { renderMenus(); updFloat(); calcTot(); saveData(); }
-
 function updFloat() {
-  const b = g('fcart');
-  const { qP, tot } = tots();
-  if (qP > 0) {
-    b.classList.add('show');
-    g('fc-cnt').innerText = qP;
-    g('fc-lbl').innerText = 'porsi di keranjang';
-    g('fc-tot').innerText = rp(tot);
-  } else {
-    b.classList.remove('show');
-  }
+  const b = g('fcart'), { qP, tot } = tots();
+  if (qP > 0) { b.classList.add('show'); g('fc-cnt').innerText = qP; g('fc-lbl').innerText = 'porsi di keranjang'; g('fc-tot').innerText = rp(tot); }
+  else b.classList.remove('show');
 }
 
 function calcTot() {
   const omzetTunai = orders.filter(o=>o.pay==='Tunai').reduce((a,o)=>a+o.sub, 0);
   const omzetQRIS = orders.filter(o=>o.pay==='QRIS').reduce((a,o)=>a+o.sub, 0);
   const omzetOnline = orders.filter(o=>o.pay==='Gojek/Online').reduce((a,o)=>a+o.sub, 0);
-
   const { sP, sT, sSc } = tots();
-  const keranjang = sP + sT + sSc;
-
-  const modal = nn(g('p_modal').value);
-  const pengeluaran = exps.reduce((a,b) => a+b.p, 0);
-
-  const manualQris = nn(g('p_qris').value);
-  const manualOnline = nn(g('p_online').value);
-
-  const totalSemuaPenjualan = omzetTunai + omzetQRIS + omzetOnline + keranjang;
-  const nettoTunai = modal + totalSemuaPenjualan - pengeluaran - manualQris - manualOnline;
-
-  const totalPorsi = orders.reduce((a,o)=>a+o.porsi, 0) + Object.values(cP).reduce((a,b)=>a+b.qty, 0);
-
-  g('t_porsi').innerText = totalPorsi + ' Porsi';
+  const modal = nn(g('p_modal').value), pengeluaran = exps.reduce((a,b) => a+b.p, 0);
+  const manualQris = nn(g('p_qris').value), manualOnline = nn(g('p_online').value);
+  const nettoTunai = modal + (omzetTunai + omzetQRIS + omzetOnline + sP + sT + sSc) - pengeluaran - manualQris - manualOnline;
+  g('t_porsi').innerText = (orders.reduce((a,o)=>a+o.porsi, 0) + Object.values(cP).reduce((a,b)=>a+b.qty, 0)) + ' Porsi';
   g('t_tunai').innerText = rp(nettoTunai < 0 ? 0 : nettoTunai);
 }
 
@@ -1057,104 +743,55 @@ function ovClick(e) { if(e.target.id==='ov') closeM(); }
 
 function updModal() {
   const { qP, tot } = tots();
-
-  const pl = g('ml-menu'); pl.innerHTML = '';
-  let hasP = false;
+  const pl = g('ml-menu'); pl.innerHTML = ''; let hasP = false;
   for(const k in cP) {
-    hasP = true;
-    const it = cP[k]; const sub = it.qty * it.h;
+    hasP = true; const it = cP[k];
     const r = document.createElement('div'); r.className = 'm-item';
-    r.innerHTML = `
-      <div><div class="m-item-n">${it.n}</div><div class="m-item-p">${rp(it.h)} / pcs</div></div>
-      <div class="m-ctrl">
-        <button class="qbtn" onclick="chP('${k}',-1)">−</button>
-        <span class="qv">${it.qty}</span>
-        <button class="qbtn" onclick="chP('${k}',1)">+</button>
-        <span class="m-sub-price">${rp(sub)}</span>
-      </div>`;
+    r.innerHTML = `<div><div class="m-item-n">${it.n}</div><div class="m-item-p">${rp(it.h)} / pcs</div></div><div class="m-ctrl"><button class="qbtn" onclick="chP('${k}',-1)">−</button><span class="qv">${it.qty}</span><button class="qbtn" onclick="chP('${k}',1)">+</button><span class="m-sub-price">${rp(it.qty*it.h)}</span></div>`;
     pl.appendChild(r);
   }
   if (!hasP) pl.innerHTML = '<div class="empty">Belum ada menu dipilih</div>';
-
-  const tw = g('ml-top-wrap'); const tl = g('ml-topping'); tl.innerHTML = ''; let hasT = false;
+  const tw = g('ml-top-wrap'), tl = g('ml-topping'); tl.innerHTML = ''; let hasT = false;
   for(const k in cT) {
-    hasT = true; const it = cT[k]; const sub = it.qty*it.h;
-    const r = document.createElement('div'); r.className='m-item';
-    r.innerHTML=`
-      <div><div class="m-item-n">${it.n}</div><div class="m-item-p">${it.h?rp(it.h)+' / pcs':'Gratis'}</div></div>
-      <div class="m-ctrl">
-        <button class="qbtn" onclick="chT('${k}',-1)">−</button>
-        <span class="qv">${it.qty}</span>
-        <button class="qbtn" onclick="chT('${k}',1)">+</button>
-        <span class="m-sub-price">${sub?rp(sub):'Gratis'}</span>
-      </div>`;
+    hasT = true; const it = cT[k]; const r = document.createElement('div'); r.className='m-item';
+    r.innerHTML=`<div><div class="m-item-n">${it.n}</div><div class="m-item-p">${it.h?rp(it.h)+' / pcs':'Gratis'}</div></div><div class="m-ctrl"><button class="qbtn" onclick="chT('${k}',-1)">−</button><span class="qv">${it.qty}</span><button class="qbtn" onclick="chT('${k}',1)">+</button><span class="m-sub-price">${it.h?rp(it.qty*it.h):'Gratis'}</span></div>`;
     tl.appendChild(r);
   }
   tw.style.display = hasT ? 'block' : 'none';
-
-  const sw2 = g('ml-sauce-wrap'); const sl = g('ml-sauce'); sl.innerHTML=''; let hasSc=false;
+  const sw2 = g('ml-sauce-wrap'), sl = g('ml-sauce'); sl.innerHTML=''; let hasSc=false;
   for(const k in cS) {
-    hasSc=true; const it=cS[k]; const sub=it.qty*it.h;
-    const r=document.createElement('div'); r.className='m-item';
-    r.innerHTML=`
-      <div><div class="m-item-n">${it.n}</div><div class="m-item-p">${it.h?rp(it.h)+' / pcs':'Gratis'}</div></div>
-      <div class="m-ctrl">
-        <button class="qbtn" onclick="chS('${k}',-1)">−</button>
-        <span class="qv">${it.qty}</span>
-        <button class="qbtn" onclick="chS('${k}',1)">+</button>
-        <span class="m-sub-price">${sub?rp(sub):'Gratis'}</span>
-      </div>`;
+    hasSc=true; const it=cS[k]; const r=document.createElement('div'); r.className='m-item';
+    r.innerHTML=`<div><div class="m-item-n">${it.n}</div><div class="m-item-p">${it.h?rp(it.h)+' / pcs':'Gratis'}</div></div><div class="m-ctrl"><button class="qbtn" onclick="chS('${k}',-1)">−</button><span class="qv">${it.qty}</span><button class="qbtn" onclick="chS('${k}',1)">+</button><span class="m-sub-price">${it.h?rp(it.qty*it.h):'Gratis'}</span></div>`;
     sl.appendChild(r);
   }
   sw2.style.display = hasSc ? 'block' : 'none';
-
-  g('m-tot').innerText = rp(tot);
-  g('m-chip').innerText = qP + ' porsi';
-  g('m-sub').innerText = oCnt > 0 ? `Pesanan ke-${oCnt+1}` : 'Pesanan baru';
+  g('m-tot').innerText = rp(tot); g('m-chip').innerText = qP + ' porsi'; g('m-sub').innerText = oCnt > 0 ? `Pesanan ke-${oCnt+1}` : 'Pesanan baru';
 }
 
-function setMat(btn) {
-  document.querySelectorAll('.mc2').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel'); selMat = btn.dataset.v; saveData();
-}
-function setPay(btn) {
-  document.querySelectorAll('.pc2').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel'); selPay = btn.dataset.v; calcTot(); saveData();
-}
+function setMat(btn) { document.querySelectorAll('.mc2').forEach(b=>b.classList.remove('sel')); btn.classList.add('sel'); selMat = btn.dataset.v; saveData(); }
+function setPay(btn) { document.querySelectorAll('.pc2').forEach(b=>b.classList.remove('sel')); btn.classList.add('sel'); selPay = btn.dataset.v; calcTot(); saveData(); }
 
 function resetCart() {
-  const { qP } = tots();
-  if (!qP) { closeM(); return; }
-  if (confirm('Kosongkan keranjang tanpa menyimpan?')) {
-    cP={}; cT={}; cS={}; upd(); closeM(); toast('🗑 Keranjang dikosongkan'); saveData();
-  }
+  if (!tots().qP) { closeM(); return; }
+  if (confirm('Kosongkan keranjang tanpa menyimpan?')) { cP={}; cT={}; cS={}; upd(); closeM(); toast('🗑 Keranjang dikosongkan'); saveData(); }
 }
 
 function confirmOrder() {
   const { qP, tot } = tots();
   if (!qP) return alert('Pilih minimal 1 menu dulu!');
   const custName = (g('c_name')?.value.trim()) || 'Pelanggan';
-  oCnt++;
-  const pi=[], ti=[], si=[];
+  oCnt++; const pi=[], ti=[], si=[];
   for(const k in cP) pi.push({n:cP[k].n, q:cP[k].qty, h:cP[k].h});
   for(const k in cT) ti.push({n:cT[k].n, q:cT[k].qty, h:cT[k].h});
   for(const k in cS) si.push({n:cS[k].n, q:cS[k].qty, h:cS[k].h});
   const order = { id:oCnt, time:tNow(), tgl:tgl(), cust:custName, pi, ti, si, sub:tot, porsi:qP, mat:selMat, pay:selPay };
-  orders.push(order);
-
-  cP={}; cT={}; cS={};
-  if(g('c_name')) g('c_name').value='';
-  selMat='Saus Campur'; selPay='Tunai';
-
+  orders.push(order); cP={}; cT={}; cS={}; if(g('c_name')) g('c_name').value=''; selMat='Saus Campur'; selPay='Tunai';
   upd(); closeM(); toast(`✓ Pesanan #${oCnt} disimpan!`); renderRekap(); saveData();
-
-  const autoPrint = g('auto-print')?.checked;
-  setTimeout(() => previewReceipt(order, autoPrint ? 'print' : 'preview'), 400);
+  setTimeout(() => previewReceipt(order, g('auto-print')?.checked ? 'print' : 'preview'), 400);
 }
 
 function addExp() {
-  const n = g('en').value.trim();
-  const p = nn(g('ep').value);
+  const n = g('en').value.trim(), p = nn(g('ep').value);
   if (!n || !p) return alert('Isi nama & jumlah!');
   exps.push({n,p}); g('en').value=''; g('ep').value='';
   renderExps(); calcTot(); saveData();
@@ -1164,11 +801,7 @@ function renderExps() {
   const el = g('explist'); el.innerHTML = '';
   exps.forEach((e,i) => {
     const d = document.createElement('div'); d.className='exp-row';
-    d.innerHTML=`<span>${e.n}</span>
-    <div style="display:flex;align-items:center;gap:8px">
-      <b>${rp(e.p)}</b>
-      <button class="exp-del" onclick="delExp(${i})">✕</button>
-    </div>`;
+    d.innerHTML=`<span>${e.n}</span><div style="display:flex;align-items:center;gap:8px"><b>${rp(e.p)}</b><button class="exp-del" onclick="delExp(${i})">✕</button></div>`;
     el.appendChild(d);
   });
 }
@@ -1177,158 +810,46 @@ function renderStok() {
   const el = g('stok-list'); el.innerHTML = '';
   stokBahan.forEach((b, i) => {
     const d = document.createElement('div'); d.className='stok-item';
-    d.innerHTML=`
-      <div>
-        <div style="font-weight:800;font-size:14px">${b.n}</div>
-        <div style="font-size:11px;color:var(--ink3)">${b.unit}</div>
-      </div>
-      <div class="stok-ctrl">
-        <button class="stok-btn m" onclick="adjStok(${i},-1)">−</button>
-        <span class="stok-q ${b.qty<=1?'low':''}">${b.qty}</span>
-        <button class="stok-btn p" onclick="adjStok(${i},1)">+</button>
-      </div>`;
+    d.innerHTML=`<div><div style="font-weight:800;font-size:14px">${b.n}</div><div style="font-size:11px;color:var(--ink3)">${b.unit}</div></div><div class="stok-ctrl"><button class="stok-btn m" onclick="adjStok(${i},-1)">−</button><span class="stok-q ${b.qty<=1?'low':''}">${b.qty}</span><button class="stok-btn p" onclick="adjStok(${i},1)">+</button></div>`;
     el.appendChild(d);
   });
 }
 function adjStok(i, d) {
-  stokBahan[i].qty = Math.max(0, stokBahan[i].qty + d);
-  renderStok(); saveData();
-  if (stokBahan[i].qty <= 1) toast(`⚠️ ${stokBahan[i].n} hampir habis!`);
-  else toast(`📦 ${stokBahan[i].n}: ${stokBahan[i].qty} ${stokBahan[i].unit}`);
+  stokBahan[i].qty = Math.max(0, stokBahan[i].qty + d); renderStok(); saveData();
+  if (stokBahan[i].qty <= 1) toast(`⚠️ ${stokBahan[i].n} hampir habis!`); else toast(`📦 ${stokBahan[i].n}: ${stokBahan[i].qty} ${stokBahan[i].unit}`);
 }
 
 function renderRekap() {
-  const rb = g('rbox'); const rl = g('rlist');
-  if (!rb || !rl) return;
-  const totalOmzet = orders.reduce((a,o)=>a+o.sub, 0);
-  const totalPorsi = orders.reduce((a,o)=>a+o.porsi, 0);
-  const modal = nn(g('p_modal').value);
-  const kel = exps.reduce((a,b)=>a+b.p, 0);
-  const qris = nn(g('p_qris').value);
-  const onl = nn(g('p_online').value);
+  const rb = g('rbox'), rl = g('rlist'); if (!rb || !rl) return;
+  const totalOmzet = orders.reduce((a,o)=>a+o.sub, 0), totalPorsi = orders.reduce((a,o)=>a+o.porsi, 0);
+  const modal = nn(g('p_modal').value), kel = exps.reduce((a,b)=>a+b.p, 0);
+  const qris = nn(g('p_qris').value), onl = nn(g('p_online').value);
   const netto = modal + totalOmzet - kel - qris - onl;
-  const byPay = {};
-  orders.forEach(o => { byPay[o.pay] = (byPay[o.pay]||0) + o.sub; });
-
-  if (!orders.length) {
-    rb.innerHTML = '<div class="empty">Belum ada transaksi dikonfirmasi</div>';
-    rl.innerHTML = ''; return;
-  }
-
-  const payStr = Object.entries(byPay)
-    .map(([k,v]) => `<div class="rr"><span>• Omzet ${k}</span><strong>${rp(v)}</strong></div>`)
-    .join('');
-
-  rb.innerHTML = `
-    <div class="rr"><span>Transaksi</span><strong>${orders.length}×</strong></div>
-    <div class="rr"><span>Porsi Terjual</span><strong>${totalPorsi} porsi</strong></div>
-    <div class="rr"><span>Omzet Penjualan</span><strong>${rp(totalOmzet)}</strong></div>
-    ${payStr}
-    <div class="rr" style="color:var(--red)"><span>💸 Pengeluaran</span><strong>−${rp(kel)}</strong></div>
-    <div class="rr" style="color:var(--blue)"><span>📱 QRIS</span><strong>−${rp(qris)}</strong></div>
-    <div class="rr" style="color:var(--green)"><span>🛵 Gojek/Online</span><strong>−${rp(onl)}</strong></div>
-    <div class="rr tot"><span>💵 Setoran Tunai</span><span>${rp(netto<0?0:netto)}</span></div>`;
-
+  const byPay = {}; orders.forEach(o => { byPay[o.pay] = (byPay[o.pay]||0) + o.sub; });
+  if (!orders.length) { rb.innerHTML = '<div class="empty">Belum ada transaksi dikonfirmasi</div>'; rl.innerHTML = ''; return; }
+  rb.innerHTML = `<div class="rr"><span>Transaksi</span><strong>${orders.length}×</strong></div><div class="rr"><span>Porsi Terjual</span><strong>${totalPorsi} porsi</strong></div><div class="rr"><span>Omzet Penjualan</span><strong>${rp(totalOmzet)}</strong></div>${Object.entries(byPay).map(([k,v]) => `<div class="rr"><span>• Omzet ${k}</span><strong>${rp(v)}</strong></div>`).join('')}<div class="rr" style="color:var(--red)"><span>💸 Pengeluaran</span><strong>−${rp(kel)}</strong></div><div class="rr" style="color:var(--blue)"><span>📱 QRIS</span><strong>−${rp(qris)}</strong></div><div class="rr" style="color:var(--green)"><span>🛵 Gojek/Online</span><strong>−${rp(onl)}</strong></div><div class="rr tot"><span>💵 Setoran Tunai</span><span>${rp(netto<0?0:netto)}</span></div>`;
   rl.innerHTML = '';
   [...orders].reverse().forEach(o => {
-    const ps = o.pi.map(i=>`${i.n}×${i.q}`).join(', ');
-    const ts = o.ti.length ? ' + ' + o.ti.map(i=>`${i.n}×${i.q}`).join(', ') : '';
-    const ss = (o.si && o.si.length) ? ' [' + o.si.map(i=>i.n).join('+') + ']' : '';
-    const oid = o.id;
+    const ps = o.pi.map(i=>`${i.n}×${i.q}`).join(', '), ts = o.ti.length ? ' + ' + o.ti.map(i=>`${i.n}×${i.q}`).join(', ') : '', ss = (o.si && o.si.length) ? ' [' + o.si.map(i=>i.n).join('+') + ']' : '';
     const d = document.createElement('div'); d.className='tx';
-    d.innerHTML=`
-      <div class="tx-top">
-        <span><span class="tx-id">#${o.id}</span><span class="tx-time">${o.time} · 👤 ${o.cust}</span></span>
-        <span class="tx-amt">${rp(o.sub)}</span>
-      </div>
-      <div class="tx-tags">
-        <span class="tag tm">🔥 ${o.mat}</span>
-        <span class="tag tb">💳 ${o.pay}</span>
-        <span class="tag tp2">🐙 ${o.porsi} porsi</span>
-      </div>
-      <div class="tx-items">${ps}${ts}${ss}</div>
-      <div class="tx-btns">
-        <button class="tx-btn preview" onclick="previewReceipt(orders.find(x=>x.id===${oid}),'preview')">👁 Struk</button>
-        <button class="tx-btn print" onclick="previewReceipt(orders.find(x=>x.id===${oid}),'print')">🖨 Cetak Ulang</button>
-      </div>`;
+    d.innerHTML=`<div class="tx-top"><span><span class="tx-id">#${o.id}</span><span class="tx-time">${o.time} · 👤 ${o.cust}</span></span><span class="tx-amt">${rp(o.sub)}</span></div><div class="tx-tags"><span class="tag tm">🔥 ${o.mat}</span><span class="tag tb">💳 ${o.pay}</span><span class="tag tp2">🐙 ${o.porsi} porsi</span></div><div class="tx-items">${ps}${ts}${ss}</div><div class="tx-btns"><button class="tx-btn preview" onclick="previewReceipt(orders.find(x=>x.id===${o.id}),'preview')">👁 Struk</button><button class="tx-btn print" onclick="previewReceipt(orders.find(x=>x.id===${o.id}),'print')">🖨 Cetak Ulang</button></div>`;
     rl.appendChild(d);
   });
 }
 
 function buildReceiptHTML(order) {
-  const storeName = g('r_nama_toko')?.value || 'Takoyaki Mazboy';
-  const addr = g('r_alamat')?.value || 'Outlet Kalibaru';
-  const footer = g('r_footer')?.value || 'Terima kasih! Arigato! 🐙';
-  const kontak = g('r_kontak')?.value || '';
-  const L32 = '─'.repeat(32);
-  const D32 = '═'.repeat(32);
-
-  let html = `
-    <div style="text-align:center;margin-bottom:10px">
-      <div style="font-size:30px">🐙</div>
-      <div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700">${storeName}</div>
-      <div style="font-size:11px;color:#666">${addr}</div>
-      ${kontak ? `<div style="font-size:11px;color:#666">${kontak}</div>` : ''}
-      <div style="font-size:10px;color:#aaa;margin-top:4px">${D32}</div>
-    </div>
-    <div style="font-size:11px;margin-bottom:8px">
-      <div>No. : <strong>#${String(order.id).padStart(4,'0')}</strong></div>
-      <div>Tgl : ${order.tgl || tgl()}</div>
-      <div>Jam : ${order.time}</div>
-      <div>Nama: <strong>${order.cust}</strong></div>
-      <div>Staff: ${g('p_nama')?.value || '-'}</div>
-    </div>
-    <div style="font-size:10px;color:#aaa">${L32}</div>
-    <div style="margin:8px 0">`;
-
-  order.pi.forEach(i => {
-    html += `<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
-      <span>${i.n} ×${i.q}</span><span>${rp(i.q*i.h)}</span></div>`;
-  });
-  if (order.ti && order.ti.length) {
-    html += `<div style="font-size:10px;color:#888;margin:4px 0">+ Isian:</div>`;
-    order.ti.forEach(i => {
-      html += `<div style="display:flex;justify-content:space-between;font-size:11px;color:#444;margin-bottom:2px">
-        <span style="padding-left:8px">• ${i.n} ×${i.q}</span>
-        <span>${i.h ? rp(i.q*i.h) : 'Gratis'}</span></div>`;
-    });
-  }
-  if (order.si && order.si.length) {
-    html += `<div style="font-size:10px;color:#888;margin:4px 0">+ Saus:</div>`;
-    order.si.forEach(i => {
-      html += `<div style="display:flex;justify-content:space-between;font-size:11px;color:#444;margin-bottom:2px">
-        <span style="padding-left:8px">• ${i.n} ×${i.q}</span>
-        <span>${i.h ? rp(i.q*i.h) : 'Gratis'}</span></div>`;
-    });
-  }
-  html += `</div>
-    <div style="font-size:10px;color:#aaa">${L32}</div>
-    <div style="margin:8px 0;font-size:12px">
-      <div style="display:flex;justify-content:space-between"><span>🔥 Saus/Cakalang:</span><strong>${order.mat}</strong></div>
-      <div style="display:flex;justify-content:space-between"><span>💳 Pembayaran:</span><strong>${order.pay}</strong></div>
-    </div>
-    <div style="font-size:10px;color:#aaa">${D32}</div>
-    <div style="display:flex;justify-content:space-between;margin:10px 0;font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700">
-      <span>TOTAL</span><span style="color:#E8003D">${rp(order.sub)}</span>
-    </div>
-    <div style="font-size:10px;color:#aaa">${D32}</div>
-    <div style="text-align:center;margin-top:12px;font-size:12px;color:#666;line-height:1.8">
-      ${footer}<br>
-      <span style="font-size:10px">たこ焼き · Takoyaki Mazboy</span>
-    </div>`;
+  const storeName = g('r_nama_toko')?.value || 'Takoyaki Mazboy', addr = g('r_alamat')?.value || 'Outlet Kalibaru', footer = g('r_footer')?.value || 'Terima kasih! Arigato! 🐙', kontak = g('r_kontak')?.value || '';
+  const L32 = '─'.repeat(32), D32 = '═'.repeat(32);
+  let html = `<div style="text-align:center;margin-bottom:10px"><div style="font-size:30px">🐙</div><div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700">${storeName}</div><div style="font-size:11px;color:#666">${addr}</div>${kontak ? `<div style="font-size:11px;color:#666">${kontak}</div>` : ''}<div style="font-size:10px;color:#aaa;margin-top:4px">${D32}</div></div><div style="font-size:11px;margin-bottom:8px"><div>No. : <strong>#${String(order.id).padStart(4,'0')}</strong></div><div>Tgl : ${order.tgl || tgl()}</div><div>Jam : ${order.time}</div><div>Nama: <strong>${order.cust}</strong></div><div>Staff: ${g('p_nama')?.value || '-'}</div></div><div style="font-size:10px;color:#aaa">${L32}</div><div style="margin:8px 0">`;
+  order.pi.forEach(i => { html += `<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>${i.n} ×${i.q}</span><span>${rp(i.q*i.h)}</span></div>`; });
+  if (order.ti && order.ti.length) { html += `<div style="font-size:10px;color:#888;margin:4px 0">+ Isian:</div>`; order.ti.forEach(i => { html += `<div style="display:flex;justify-content:space-between;font-size:11px;color:#444;margin-bottom:2px"><span style="padding-left:8px">• ${i.n} ×${i.q}</span><span>${i.h ? rp(i.q*i.h) : 'Gratis'}</span></div>`; }); }
+  if (order.si && order.si.length) { html += `<div style="font-size:10px;color:#888;margin:4px 0">+ Saus:</div>`; order.si.forEach(i => { html += `<div style="display:flex;justify-content:space-between;font-size:11px;color:#444;margin-bottom:2px"><span style="padding-left:8px">• ${i.n} ×${i.q}</span><span>${i.h ? rp(i.q*i.h) : 'Gratis'}</span></div>`; }); }
+  html += `</div><div style="font-size:10px;color:#aaa">${L32}</div><div style="margin:8px 0;font-size:12px"><div style="display:flex;justify-content:space-between"><span>🔥 Saus/Cakalang:</span><strong>${order.mat}</strong></div><div style="display:flex;justify-content:space-between"><span>💳 Pembayaran:</span><strong>${order.pay}</strong></div></div><div style="font-size:10px;color:#aaa">${D32}</div><div style="display:flex;justify-content:space-between;margin:10px 0;font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700"><span>TOTAL</span><span style="color:#E8003D">${rp(order.sub)}</span></div><div style="font-size:10px;color:#aaa">${D32}</div><div style="text-align:center;margin-top:12px;font-size:12px;color:#666;line-height:1.8">${footer}<br><span style="font-size:10px">たこ焼き · Takoyaki Mazboy</span></div>`;
   return html;
 }
 
 function previewReceipt(order, mode) {
-  if (!order) {
-    order = {
-      id:'TEST', time:tNow(), tgl:tgl(), cust:'Preview Customer',
-      pi:[{n:'Takoyaki Medium',q:2,h:18000}],
-      ti:[{n:'Gurita',q:1,h:0}],
-      si:[{n:'Mayo',q:1,h:0}],
-      sub:36000, porsi:2, mat:'Saus Campur', pay:'Tunai'
-    };
-  }
+  if (!order) order = { id:'TEST', time:tNow(), tgl:tgl(), cust:'Preview Customer', pi:[{n:'Takoyaki Medium',q:2,h:18000}], ti:[{n:'Gurita',q:1,h:0}], si:[{n:'Mayo',q:1,h:0}], sub:36000, porsi:2, mat:'Saus Campur', pay:'Tunai' };
   g('receipt-content').innerHTML = buildReceiptHTML(order);
   g('print-ov').classList.add('on');
   if (mode === 'print') setTimeout(doPrint, 350);
@@ -1337,168 +858,94 @@ function previewReceipt(order, mode) {
 function closePrintOv() { g('print-ov').classList.remove('on'); }
 
 function doPrint() {
-  if (printerConnected && (printerMethod==='bluetooth'||printerMethod==='usb')) {
-    sendEscPosToPrinter();
-  } else {
-    const html = g('receipt-content').innerHTML;
-    const w = window.open('','_blank','width=380,height=700');
-    w.document.write(`<!DOCTYPE html><html><head>
-      <meta charset="UTF-8">
-      <style>body{font-family:monospace;padding:16px;}</style></head>
-      <body>${html}</body></html>`);
-    w.document.close();
-    w.print();
+  if (printerConnected && (printerMethod==='bluetooth'||printerMethod==='usb')) sendEscPosToPrinter();
+  else {
+    const html = g('receipt-content').innerHTML, w = window.open('','_blank','width=380,height=700');
+    w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:monospace;padding:16px;}</style></head><body>${html}</body></html>`);
+    w.document.close(); w.print();
   }
   toast('🖨 Mencetak struk...');
 }
-
 function printTestReceipt() { previewReceipt(null, 'print'); }
 
 function setPrinterMethod(method, btn) {
-  printerMethod = method;
-  document.querySelectorAll('.pm-btn').forEach(b => b.classList.remove('sel'));
+  printerMethod = method; document.querySelectorAll('.pm-btn').forEach(b => b.classList.remove('sel'));
   if (btn) btn.classList.add('sel');
   g('lan-panel').style.display = method==='lan' ? 'block' : 'none';
   g('bt-panel').style.display = method==='bluetooth' ? 'block' : 'none';
   g('usb-panel').style.display = method==='usb' ? 'block' : 'none';
-  printerConnected = false;
-  updatePrinterStatus('idle','Belum Terhubung','Pilih metode koneksi');
+  printerConnected = false; updatePrinterStatus('idle','Belum Terhubung','Pilih metode koneksi');
 }
 
-function printerLog(msg) {
-  const log = g('printer-log');
-  if (log) { log.innerText += '\n' + msg; log.scrollTop = log.scrollHeight; }
-}
-
+function printerLog(msg) { const log = g('printer-log'); if (log) { log.innerText += '\n' + msg; log.scrollTop = log.scrollHeight; } }
 function updatePrinterStatus(type, main, sub) {
-  const dot = g('p-dot');
-  if (dot) dot.className = 'p-dot ' + (type === 'on' ? 'on' : type === 'err' ? 'err' : '');
-  g('p-status-text').innerText = main;
-  g('p-status-sub').innerText = sub;
+  const dot = g('p-dot'); if (dot) dot.className = 'p-dot ' + (type === 'on' ? 'on' : type === 'err' ? 'err' : '');
+  g('p-status-text').innerText = main; g('p-status-sub').innerText = sub;
 }
+function _setConnected(main, sub) { printerConnected = true; updatePrinterStatus('on', main, sub); printerLog('✓ ' + main + ' terhubung!'); toast('✓ Printer terhubung!'); }
 
-function _setConnected(main, sub) {
-  printerConnected = true;
-  updatePrinterStatus('on', main, sub);
-  printerLog('✓ ' + main + ' terhubung!');
-  toast('✓ Printer terhubung!');
-}
-
-async function connectPrinter() {
-  if (printerMethod === 'lan') await connectLAN();
-  else if (printerMethod === 'bluetooth') await connectBluetooth();
-  else if (printerMethod === 'usb') await connectUSB();
-}
-
-async function testPrinter() {
-  if (!printerConnected) return toast('❌ Printer belum terhubung!');
-  printTestReceipt();
-}
-
+async function connectPrinter() { if (printerMethod === 'lan') await connectLAN(); else if (printerMethod === 'bluetooth') await connectBluetooth(); else if (printerMethod === 'usb') await connectUSB(); }
+async function testPrinter() { if (!printerConnected) return toast('❌ Printer belum terhubung!'); printTestReceipt(); }
 async function connectLAN() {
-  const ip = g('printer-ip').value.trim();
-  const port = g('printer-port').value || '9100';
-  if (!ip) return alert('Masukkan IP Address printer!');
-  _setConnected(`Printer LAN ${ip}`, `Port ${port}`);
+  const ip = g('printer-ip').value.trim(), port = g('printer-port').value || '9100';
+  if (!ip) return alert('Masukkan IP Address printer!'); _setConnected(`Printer LAN ${ip}`, `Port ${port}`);
 }
-
 async function scanBluetoothPrinter() {
   if (!navigator.bluetooth) return toast('⚠️ Browser tidak mendukung Web Bluetooth');
-  try {
-    const device = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb']
-    });
-    selectedBtDevice = device;
-    g('bt-device-list').innerHTML = `<div style="color:#fff;font-size:12px;">Device Terpilih: ${device.name}</div>`;
-  } catch(e) {
-    printerLog('✗ Scan dibatalkan/Gagal');
-  }
+  try { selectedBtDevice = await navigator.bluetooth.requestDevice({ acceptAllDevices: true, optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb'] }); g('bt-device-list').innerHTML = `<div style="color:#fff;font-size:12px;">Device Terpilih: ${selectedBtDevice.name}</div>`; } catch(e) { printerLog('✗ Scan dibatalkan/Gagal'); }
 }
-
 async function connectBluetooth() {
   if (!selectedBtDevice) return toast('Scan printer dulu!');
   try {
-    const server = await selectedBtDevice.gatt.connect();
-    const service = await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb');
-    const chars = await service.getCharacteristics();
+    const server = await selectedBtDevice.gatt.connect(), service = await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb'), chars = await service.getCharacteristics();
     btCharacteristic = chars.find(c => c.properties.write || c.properties.writeWithoutResponse);
     _setConnected(`BT: ${selectedBtDevice.name}`, 'Ready');
-  } catch(e) {
-    printerLog('✗ Bluetooth error: ' + e.message);
-  }
+  } catch(e) { printerLog('✗ Bluetooth error: ' + e.message); }
 }
-
 async function connectUSB() {
   if (!navigator.usb) return toast('⚠️ USB tidak didukung');
-  try {
-    usbDevice = await navigator.usb.requestDevice({ filters: [] });
-    await usbDevice.open();
-    await usbDevice.selectConfiguration(1);
-    await usbDevice.claimInterface(0);
-    _setConnected(`USB Printer`, 'Ready');
-  } catch(e) {
-    printerLog('✗ USB Error: ' + e.message);
-  }
+  try { usbDevice = await navigator.usb.requestDevice({ filters: [] }); await usbDevice.open(); await usbDevice.selectConfiguration(1); await usbDevice.claimInterface(0); _setConnected(`USB Printer`, 'Ready'); } catch(e) { printerLog('✗ USB Error: ' + e.message); }
 }
+async function sendEscPosToPrinter() { toast('✓ Struk dicetak via ESC/POS'); }
 
-async function sendEscPosToPrinter() {
-  toast('✓ Struk dicetak via ESC/POS');
-}
-
-/* ══════════════════════════════════════════
-   15. GENERATOR WHATSAPP REPORT (KOMPREHENSIF)
-══════════════════════════════════════════ */
+// ==========================================
+// 15. GENERATOR WHATSAPP REPORT (DIUBAH & DIPERBAIKI)
+// ==========================================
 function checkout() {
-  const nama = getEl('p_nama')?.value.trim();
+  const nama = g('p_nama')?.value.trim();
   if (!nama) return alert('Isi nama staff di tab Absen dulu!');
   
-  const { qtyTako } = hitungTotalKeranjang();
+  const { qP: qtyTako } = tots();
   if (qtyTako > 0) {
     if (!confirm('Masih ada item di keranjang. Simpan otomatis?')) return;
     confirmOrder();
   }
   if (!orders.length) return alert('Belum ada pesanan tersimpan!');
 
-  // Penarikan Data Dasar
-  const shift = getEl('p_shift')?.value || '-';
-  const tanggal = getDateNow();
-  const modal = parseNum(getEl('p_modal')?.value);
+  const shift = g('p_shift')?.value || '-';
+  const tanggal = tgl();
+  const modal = nn(g('p_modal')?.value);
   
   const totalOmzet = orders.reduce((a, o) => a + o.sub, 0);
   const totalPorsi = orders.reduce((a, o) => a + o.porsi, 0);
   const totalTransaksi = orders.length;
   
-  // Rata-rata
   const rataOmzet = totalTransaksi > 0 ? Math.round(totalOmzet / totalTransaksi) : 0;
   const rataPorsi = totalTransaksi > 0 ? (totalPorsi / totalTransaksi).toFixed(1) : 0;
 
-  // Metode Pembayaran
   const omzetTunai = orders.filter(o => o.pay === 'Tunai').reduce((a, o) => a + o.sub, 0);
   const omzetQRIS = orders.filter(o => o.pay === 'QRIS').reduce((a, o) => a + o.sub, 0);
   const omzetOnline = orders.filter(o => o.pay === 'Gojek/Online').reduce((a, o) => a + o.sub, 0);
 
-  // Rekonsiliasi Kas & Pengeluaran
-  const totalPengeluaran = expenses.reduce((a, b) => a + b.p, 0);
+  const totalPengeluaran = exps.reduce((a, b) => a + b.p, 0);
   const totalKas = modal + omzetTunai;
   const setoranTunai = totalKas - totalPengeluaran;
   const setoranFinal = setoranTunai < 0 ? 0 : setoranTunai;
 
-  // Top Produk Terlaris
   const rekapTakoyaki = {};
-  orders.forEach(o => {
-    o.pi.forEach(i => {
-      if (!rekapTakoyaki[i.n]) rekapTakoyaki[i.n] = 0;
-      rekapTakoyaki[i.n] += i.q;
-    });
-  });
-  const topProduk = Object.entries(rekapTakoyaki)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([n, q], index) => `${index + 1}. ${n} (${q} porsi)`)
-    .join('\n');
+  orders.forEach(o => { o.pi.forEach(i => { if (!rekapTakoyaki[i.n]) rekapTakoyaki[i.n] = 0; rekapTakoyaki[i.n] += i.q; }); });
+  const topProduk = Object.entries(rekapTakoyaki).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([n, q], index) => `${index + 1}. ${n} (${q} porsi)`).join('\n');
 
-  // Detail Menu Terjual & Transaksi
   const rekapIsian = {}, rekapSaus = {};
   orders.forEach(o => {
     o.ti.forEach(i => { if (!rekapIsian[i.n]) rekapIsian[i.n] = 0; rekapIsian[i.n] += i.q; });
@@ -1515,14 +962,13 @@ function checkout() {
     const ps = o.pi.map(i => `${i.n} x${i.q}`).join(', ');
     const ts = o.ti.length ? ' + ' + o.ti.map(i => `${i.n}`).join('+') : '';
     const ss = (o.si && o.si.length) ? ' [' + o.si.map(i => i.n).join('+') + ']' : '';
-    return `#${o.id} | ${o.time} | ${o.cust}\n🛒 ${ps}${ts}${ss}\n💳 ${o.pay} | 💰 ${formatRp(o.sub)}`;
+    return `#${o.id} | ${o.time} | ${o.cust}\n🛒 ${ps}${ts}${ss}\n💳 ${o.pay} | 💰 ${rp(o.sub)}`;
   }).join('\n\n');
 
-  const sAdonan = getEl('s_adonan')?.value || '-';
-  const sBhn = getEl('s_bahan')?.value || '-';
-  const sNot = getEl('s_note')?.value || '-';
+  const sAdonan = g('s_adonan')?.value || '-';
+  const sBhn = g('s_bahan')?.value || '-';
+  const sNot = g('s_note')?.value || '-';
 
-  // FORMAT LAPORAN WHATSAPP
   const report = `📊 *LAPORAN HARIAN TAKOYAKI SAPORE*
 
 👤 Kasir : ${nama}
@@ -1533,10 +979,10 @@ function checkout() {
 
 📌 *DASHBOARD HARI INI*
 
-💰 Omzet : ${formatRp(totalOmzet)}
+💰 Omzet : ${rp(totalOmzet)}
 🥤 Porsi Terjual : ${totalPorsi} Porsi
 🛒 Jumlah Transaksi : ${totalTransaksi}×
-💵 Rata-rata/Transaksi : ${formatRp(rataOmzet)}
+💵 Rata-rata/Transaksi : ${rp(rataOmzet)}
 🥤 Rata-rata Porsi/Transaksi : ${rataPorsi}
 🎁 Diskon : Rp 0
 🎉 Gratis : 0 cup
@@ -1545,23 +991,23 @@ function checkout() {
 
 💳 *METODE PEMBAYARAN*
 
-💵 Tunai : ${formatRp(omzetTunai)}
-📱 QRIS : ${formatRp(omzetQRIS)}
-🛵 Online : ${formatRp(omzetOnline)}
+💵 Tunai : ${rp(omzetTunai)}
+📱 QRIS : ${rp(omzetQRIS)}
+🛵 Online : ${rp(omzetOnline)}
 
-TOTAL : ${formatRp(totalOmzet)}
+TOTAL : ${rp(totalOmzet)}
 
 ━━━━━━━━━━━━━━━━━━
 
 💰 *REKONSILIASI KAS*
 
-Modal Awal : ${formatRp(modal)}
-+ Omzet Tunai : ${formatRp(omzetTunai)}
-= Total Kas : ${formatRp(totalKas)}
+Modal Awal : ${rp(modal)}
++ Omzet Tunai : ${rp(omzetTunai)}
+= Total Kas : ${rp(totalKas)}
 
-- Pengeluaran : ${formatRp(totalPengeluaran)}
+- Pengeluaran : ${rp(totalPengeluaran)}
 
-💵 Setoran : ${formatRp(setoranFinal)}
+💵 Setoran : ${rp(setoranFinal)}
 
 ✅ Selisih Kas : Rp0
 
@@ -1574,7 +1020,6 @@ ${topProduk || 'Belum ada data'}
 ━━━━━━━━━━━━━━━━━━
 
 📦 *PEMBELIAN STOK*
-(Disesuaikan dari input operasional)
 • Sisa Ball/Adonan : ${sAdonan}
 • Sisa Bahan : ${sBhn}
 
@@ -1583,8 +1028,7 @@ Subtotal : Rp 0
 ━━━━━━━━━━━━━━━━━━
 
 🏪 *BIAYA OPERASIONAL*
-(Total Pengeluaran Shift Ini)
-Subtotal : ${formatRp(totalPengeluaran)}
+Subtotal : ${rp(totalPengeluaran)}
 
 ━━━━━━━━━━━━━━━━━━
 
@@ -1594,13 +1038,11 @@ ${stokBahan.map(b => `• ${b.n} : ${b.qty} ${b.unit}`).join('\n')}
 ━━━━━━━━━━━━━━━━━━
 
 ⚠️ *CATATAN SHIFT*
-
 • ${sNot}
 
 ━━━━━━━━━━━━━━━━━━
 
 👥 *KARYAWAN*
-
 Nama : ${nama}
 Masuk : ${shift}
 Libur : -
@@ -1609,43 +1051,20 @@ Kasbon : -
 ━━━━━━━━━━━━━━━━━━
 
 📋 *DETAIL MENU TERJUAL*
-
 ${detailMenuStr || 'Belum ada item terjual'}
 
 ━━━━━━━━━━━━━━━━━━
 
 🧾 *DETAIL TRANSAKSI*
-
 ${strDetailTransaksi}`;
 
-  // Eksekusi Buka WhatsApp
   window.open(`https://api.whatsapp.com/send?phone=${ADMIN}&text=${encodeURIComponent(report.trim())}`);
-
-  if (getEl('auto-print-shift')?.checked) {
-    setTimeout(() => printTestReceipt(), 900);
-  }
-
-  // Reset Data setelah laporan terkirim
-  if (confirm('Laporan terkirim! Reset data shift ini?')) {
-    orders = []; expenses = []; orderCount = 0; cartTakoyaki = {}; cartIsian = {}; cartSaus = {};
-    ['p_qris', 'p_online', 's_adonan', 's_bahan', 's_note', 'c_name'].forEach(id => {
-      const e = getEl(id); if (e) e.value = '';
-    });
-    localStorage.removeItem('TAKO_POS_DATA');
-    updateAllUi(); renderExps(); renderRekap(); renderStok();
-    toast('✓ Shift selesai, data di-reset. Arigatou! 🐙');
-  }
 }
+
 function saveData() {
   const data = {
     cP, cT, cS, orders, exps, oCnt, selMat, selPay, stokBahan, printerMethod,
-    inputs: {
-      p_nama: g('p_nama')?.value || '',
-      p_shift: g('p_shift')?.value || '',
-      p_modal: g('p_modal')?.value || '',
-      p_qris: g('p_qris')?.value || '',
-      p_online: g('p_online')?.value || '',
-    }
+    inputs: { p_nama: g('p_nama')?.value || '', p_shift: g('p_shift')?.value || '', p_modal: g('p_modal')?.value || '', p_qris: g('p_qris')?.value || '', p_online: g('p_online')?.value || '' }
   };
   localStorage.setItem('TAKO_POS_DATA', JSON.stringify(data));
 }
@@ -1655,96 +1074,73 @@ function loadData() {
   if (!raw) return;
   try {
     const d = JSON.parse(raw);
-    cP = d.cP || {}; cT = d.cT || {}; cS = d.cS || {};
-    orders = d.orders || []; exps = d.exps || []; oCnt = d.oCnt || 0;
-    if (d.inputs) {
-      setV('p_nama', d.inputs.p_nama);
-      setV('p_shift', d.inputs.p_shift);
-      setV('p_modal', d.inputs.p_modal);
-      setV('p_qris', d.inputs.p_qris);
-      setV('p_online', d.inputs.p_online);
-    }
-    updProf();
-    upd();
+    cP = d.cP || {}; cT = d.cT || {}; cS = d.cS || {}; orders = d.orders || []; exps = d.exps || []; oCnt = d.oCnt || 0;
+    if (d.inputs) { setV('p_nama', d.inputs.p_nama); setV('p_shift', d.inputs.p_shift); setV('p_modal', d.inputs.p_modal); setV('p_qris', d.inputs.p_qris); setV('p_online', d.inputs.p_online); }
+    updProf(); upd();
   } catch(e){}
 }
 
 /* ── LOGIKA KALKULATOR MELAYANG ── */
-let calcExpr = '';
-const calcTrigger = g('calc-trigger-btn');
-const calcEl = g('floating-calc');
-const calcMinBtn = g('calc-min-btn');
-const calcCloseBtn = g('calc-close-btn');
-const calcOutput = g('calc-output');
-const calcHistory = g('calc-history');
-
+let calcExpr = ''; const calcTrigger = g('calc-trigger-btn'), calcEl = g('floating-calc'), calcMinBtn = g('calc-min-btn'), calcCloseBtn = g('calc-close-btn'), calcOutput = g('calc-output'), calcHistory = g('calc-history');
 if (calcTrigger) calcTrigger.onclick = () => calcEl.classList.toggle('hidden');
 if (calcCloseBtn) calcCloseBtn.onclick = () => calcEl.classList.add('hidden');
 if (calcMinBtn) calcMinBtn.onclick = () => calcEl.classList.toggle('minimized');
-
 document.querySelectorAll('.calc-buttons .btn').forEach(btn => {
   btn.onclick = () => {
-    const num = btn.dataset.num;
-    const action = btn.dataset.action;
-
-    if (num !== undefined) {
-      if (calcExpr === '0' && num !== '.') calcExpr = '';
-      calcExpr += num;
-    } else if (action) {
+    const num = btn.dataset.num, action = btn.dataset.action;
+    if (num !== undefined) { if (calcExpr === '0' && num !== '.') calcExpr = ''; calcExpr += num; }
+    else if (action) {
       if (action === 'clear') { calcExpr = ''; calcHistory.innerText = ''; }
       else if (action === 'backspace') { calcExpr = calcExpr.slice(0, -1); }
-      else if (action === 'percent') {
-        try { calcExpr = (eval(calcExpr.replace(/×/g, '*').replace(/÷/g, '/')) / 100).toString(); } catch(e){}
-      }
-      else if (action === 'add') calcExpr += '+';
-      else if (action === 'subtract') calcExpr += '-';
-      else if (action === 'multiply') calcExpr += '*';
-      else if (action === 'divide') calcExpr += '/';
-      else if (action === 'calculate') {
-        try {
-          calcHistory.innerText = calcExpr;
-          const res = eval(calcExpr);
-          calcExpr = Number.isInteger(res) ? res.toString() : res.toFixed(2).toString();
-        } catch(e) { calcExpr = 'Error'; }
-      }
+      else if (action === 'percent') { try { calcExpr = (eval(calcExpr.replace(/×/g, '*').replace(/÷/g, '/')) / 100).toString(); } catch(e){} }
+      else if (action === 'add') calcExpr += '+'; else if (action === 'subtract') calcExpr += '-'; else if (action === 'multiply') calcExpr += '*'; else if (action === 'divide') calcExpr += '/';
+      else if (action === 'calculate') { try { calcHistory.innerText = calcExpr; const res = eval(calcExpr); calcExpr = Number.isInteger(res) ? res.toString() : res.toFixed(2).toString(); } catch(e) { calcExpr = 'Error'; } }
     }
     calcOutput.innerText = calcExpr || '0';
   };
 });
-
-// Dragging Kalkulator
 const calcHeader = g('calc-header');
 if (calcHeader && calcEl) {
   let isDragging = false, offsetP = [0,0];
-  calcHeader.onmousedown = (e) => {
-    isDragging = true;
-    offsetP = [calcEl.offsetLeft - e.clientX, calcEl.offsetTop - e.clientY];
-  };
-  document.onmousemove = (e) => {
-    if (!isDragging) return;
-    calcEl.style.left = (e.clientX + offsetP[0]) + 'px';
-    calcEl.style.top = (e.clientY + offsetP[1]) + 'px';
-  };
+  calcHeader.onmousedown = (e) => { isDragging = true; offsetP = [calcEl.offsetLeft - e.clientX, calcEl.offsetTop - e.clientY]; };
+  document.onmousemove = (e) => { if (!isDragging) return; calcEl.style.left = (e.clientX + offsetP[0]) + 'px'; calcEl.style.top = (e.clientY + offsetP[1]) + 'px'; };
   document.onmouseup = () => isDragging = false;
 }
 
-window.onload = () => {
-  loadData();
-  renderMenus();
-};
-  // ==========================================
-// 9. FUNGSI RESET DARURAT
+window.onload = () => { loadData(); renderMenus(); };
+
+// ==========================================
+// 9. FUNGSI RESET DARURAT (DIUBAH & DIPERBAIKI)
 // ==========================================
 function confirmResetDarurat() {
-    hapticFeedback(); 
+    if(navigator.vibrate) navigator.vibrate(20); 
     
     const peringatan = "🚨 PERINGATAN DARURAT! 🚨\n\nApakah Anda yakin ingin MENGHAPUS SEMUA DATA shift ini?\nSemua keranjang, riwayat, dan pengeluaran yang BELUM DIKIRIM akan hilang selamanya.";
     
     if (confirm(peringatan)) {
-        resetSemuaData();
-        const btnAbsen = document.querySelector('.nav-item[onclick*="tab-absen"]');
-        if (btnAbsen) openTab('tab-absen', btnAbsen);
-        showToast("🚨 Semua data berhasil dikosongkan!");
+        // Hapus variable state
+        cP = {}; cT = {}; cS = {}; orders = []; exps = []; oCnt = 0;
+        
+        // Reset input fields
+        ['p_nama', 'p_shift', 'p_modal', 'p_qris', 'p_online', 's_adonan', 's_bahan', 's_note', 'c_name'].forEach(id => {
+            const e = g(id); if (e) e.value = '';
+        });
+        
+        // Hapus dari memory local
+        localStorage.removeItem('TAKO_POS_DATA');
+        
+        // Update UI
+        updProf();
+        upd();
+        renderExps();
+        renderRekap();
+        renderStok();
+        
+        // Pindah ke tab Absen
+        const btnAbsen = g('nb-absen');
+        if (btnAbsen) sw('absen', btnAbsen);
+        
+        toast("🚨 Semua data berhasil dikosongkan!");
     }
 }
 </script>
